@@ -3,7 +3,7 @@
 
 # SonarQube Installation Guide for existing Team Foundation Server 2013 Single Server Environment
 
-| [Introduction](./_README.md) | [Prerequisites](./Prerequisites.md) | [Installation and Configuration](./Installation and Configuration.md) | [**Additional Configurations**](Additional Configurations.md) | [Appendix](Appendix.md) |
+| [Introduction](./README.md) | [Prerequisites](./Prerequisites.md) | [Installation and Configuration](./Installation and Configuration.md) | [**Additional Configurations**](Additional Configurations.md) | [Appendix](Appendix.md) |
 
 ## Additional Configurations
 
