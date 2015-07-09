@@ -71,7 +71,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 
 	- Right-click on **sonarqube-5.1.zip**, select Properties and then click on the **Unblock** button
 
-		![](_img/sonarqube-5.1-Properties.PNG)
+		![](_img/sonarqube-5.1-Properties.png)
 	- Unzip **SonarQube-x.x.zip** on to a drive, for example use **C:\\SonarQube\\SonarQube-5.1**.
 
 		![](_img/Unzip-SonarQube-x.x.zip.png)
@@ -198,11 +198,10 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 3. **Create and set environment variables**
 	- As per the [SonarQube installation instructions](http://docs.sonarqube.org/display/SONAR/Installing+and+Configuring+SonarQube+Runner), create a new **SONAR\_RUNNER\_HOME** environment variable set to installation directory, for example: **C:\\SonarQube\\sonar-runner-2.4.
 
-		![](_img/SONAR_RUNNER_HOME.PNG)
 	- Add the **bin** directory to your Path. Example: **C:\\SonarQube\\sonar-runner-2.4\\bin**
 
-		![](_img/SONAR_RUNNER_HOME-Path.PNG)
-		![](_img/SONAR_RUNNER_HOME-Path-EnvVariable.PNG)
+		![](_img/SONAR_RUNNER_HOME-Path.png)
+		![](_img/SONAR_RUNNER_HOME-Path-EnvVariable.png)
 	- As per SonarQube recommendations, to avoid running out of memory when analyzing large project increase the memory available to the JVM by setting the **SONAR\_RUNNER\_OPTS** environment variable. See [Analyzing with SonarQube Runner](http://docs.sonarqube.org/display/SONAR/Analyzing+with+SonarQube+Runner) on the SonarQube site for more information.
 		**>> NOTE >>** Setting this parameter is **unnecessary** in **Java 8** and may results in a runtime error from the JVM that causes the build to fail.
 
@@ -212,7 +211,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Open a new command window by pressing **Windows+R**, entering **cmd** and pressing Enter.
 	- Within the command window, enter **sonar-runner –h** and press Enter.You should see something similar to the following:
 
-		![](_img/Testing-the-SonarQube-Runner.PNG)
+		![](_img/Testing-the-SonarQube-Runner.png)
 	- You should see the default SonarQube Runner help text as shown above. If not, re-validate settings as shown in the previous sections.
 
 ### Install SonarQube.MSBuild.Runner on the Build Machine
@@ -295,7 +294,7 @@ This means that a Build Definition must build and analyze all of the assemblies 
 	- Open the Team Explorer in Visual Studio.
 	- Check that you are connected to the correct Team Foundation Server.
 
-		![](_img/Team-Explorer-Connected.PNG)
+		![](_img/Team-Explorer-Connected.png)
 	- Click on the **Builds** tab.
 	- The displayed **Builds** page will show information about recent builds and any build definitions that exist.
 	- Right-click on the build definition you want to modify and select **Edit Build Definition…** 

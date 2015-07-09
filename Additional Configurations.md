@@ -1,4 +1,4 @@
-	[VISUAL STUDIO ALM RANGERS](http://aka.ms/vsaraboutus)
+[VISUAL STUDIO ALM RANGERS](http://aka.ms/vsaraboutus)
  ---
 
 # SonarQube Installation Guide for existing Team Foundation Server 2013 Single Server Environment
