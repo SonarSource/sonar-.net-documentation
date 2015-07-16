@@ -19,7 +19,7 @@
 	- [Integrate with Team Build](#integrate-with-team-build)
 - [Additional Configurations](#additional-configurations)
 	- [Running SonarQube as a Service on Windows](#running-sonarqube-as-a-service-on-windows)
-	- [Configuring SonarQube to use Microsoft SQL Database](#configuring-sonarqube-to-use-microsoft-sql-database)
+	- [Configure SonarQube to use Microsoft SQL Database](#configure-sonarqube-to-use-microsoft-sql-database)
 	- [Secure the SonarQube Portal](#secure-the-sonarqube-portal)
 - [Appendix](#appendix)
 	- [Analysis Parameters](#analysis-parameters)
@@ -78,7 +78,7 @@ SonarQube assumes that all of the source files have the same file encoding. Curr
 
 **>> NOTE >>** For the most up to date information on SonarQube requirements, check out the [requirements](http://docs.sonarqube.org/display/SONAR/Requirements).
 
-## Installation and Configurations 
+## Installation and Configuration
 ### Installation Topologies 
 #### Minimum Deployment
 
