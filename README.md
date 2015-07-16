@@ -5,24 +5,24 @@
 
 ## Table of Contents
 
-- [Introduction](#Introduction)
-- [Prerequisites](#Prerequisites)
-	- Java
-	- Database
-	- Web Browser
-	- Hardware
-	- File Encoding
-- [Installation and Configuration](#Installation-and-Configuration)
-	- Installation Topologies
-	- Setup SonarQube Server
-	- Setup the Build Agent Machine
-	- Integrate with Team Build
-- [Additional Configurations](#Additional-Configurations)
-	- Running SonarQube as a Service on Windows
-	- Configuring SonarQube to use Microsoft SQL Database
-	- Secure the SonarQube Portal
-- [Appendix](#Appendix)
-	- Analysis Parameters
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+	- [Java](#java)
+	- [Database](#database)
+	- [Web Browser](#web-browser)
+	- [Hardware](#hardware)
+	- [File Encoding](#file-encoding)
+- [Installation and Configuration](#installation-and-configuration)
+	- [Installation Topologies](#installation-topologies)
+	- [Setup SonarQube Server](#setup-sonarqube-server)
+	- [Setup the Build Agent Machine](#setup-the-build-agent-machine)
+	- [Integrate with Team Build](#integrate-with-team-build)
+- [Additional Configurations](#additional-configurations)
+	- [Running SonarQube as a Service on Windows](#running-sonarqube-as-a-service-on-windows)
+	- [Configuring SonarQube to use Microsoft SQL Database](#configuring-sonarqube-to-use-microsoft-sql-database)
+	- [Secure the SonarQube Portal](#secure-the-sonarqube-portal)
+- [Appendix](#appendix)
+	- [Analysis Parameters](#analysis-parameters)
 
 ## Introduction
 
