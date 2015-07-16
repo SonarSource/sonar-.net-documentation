@@ -140,7 +140,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		![](_img/Java-SE-Runtime-Environment.png)
 3. **Extract**
 
-	**>> NOTE >>** Before installing and configuring SonarQube install and configure SQL Server according to the instructions in the section [Additional Configurations](3_Additional Configurations.md).
+	**>> NOTE >>** Before installing and configuring SonarQube install and configure SQL Server according to the instructions in the section [Additional Configurations](#additional-configurations).
 
 	- Right-click on **sonarqube-5.1.zip**, select Properties and then click on the **Unblock** button
 
@@ -450,7 +450,7 @@ This means that a Build Definition must build and analyze all of the assemblies 
 
 #### Analysis build fails if the build definition name contains brackets
 
-Refer to [SonarQube MSBuild Runner on Jira](http://jira.codehaus.org/browse/SONARMSBRU), [Issue Sonar MS Bru 12](http://jira.codehaus.org/browse/SONARMSBRU-12) for details.
+Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/SONARMSBRU), [Issue Sonar MS Bru 12](http://jira.sonarsource.com/browse/SONARMSBRU-12) for details.
 
 #### Build did not complete successfully and build summary contains one or more errors.
 
@@ -477,7 +477,7 @@ Most analysis-related configuration or execution errors will cause the build to 
 - Rename the build definition and remove (Dev) part.
 
 #### IsTestByFileName task fails intermittently due to file locking issue
-Refer to [SonarQube MSBuild Runner on Jira](http://jira.codehaus.org/browse/SONARMSBRU), issue <http://jira.codehaus.org/browse/SONARMSBRU-11> for details.
+Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/SONARMSBRU), issue <http://jira.sonarsource.com/browse/SONARMSBRU-11> for details.
 
 # Additional Configurations
 
@@ -622,9 +622,9 @@ See [Security](http://docs.sonarqube.org/display/SONAR/Settings+Encryption) sect
 ## Appendix
 ### Analysis Parameters
 
-For a complete lists of Parameters that you use to configure project analysis , please refer to <http://docs.sonarqube.org/display/SONAR/Analysis+Parameters.
+For a complete lists of Parameters that you use to configure project analysis , please refer to http://docs.sonarqube.org/display/SONAR/Analysis+Parameters.
 
-**>> NOTE >>** For analysis builds integrated with Team Build, as described in the [Installation and Configuration](./1_Installation and Configuration.md), the **sonar-project.properties** is generated as part of the build. In this case, the analysis configuration is done via the SonarQube portal.
+**>> NOTE >>** For analysis builds integrated with Team Build, as described in the [Installation and Configuration](#installation-and-configuration), the **sonar-project.properties** is generated as part of the build. In this case, the analysis configuration is done via the SonarQube portal.
 
 ## In Conclusion
 
