@@ -1,7 +1,7 @@
 [VISUAL STUDIO ALM RANGERS](http://aka.ms/vsaraboutus)
  ---
 
-# SonarQube Installation Guide for existing Team Foundation Server 2013 Single Server Environment
+# SonarQube Setup Guide for .NET users
 
 ## Table of Contents
 
@@ -15,20 +15,19 @@
 - [Installation and Configuration](#installation-and-configuration)
 	- [Installation Topologies](#installation-topologies)
 	- [Setup SonarQube Server](#setup-sonarqube-server)
-	- [Setup the Build Agent Machine](#setup-the-build-agent-machine)
+	- [Setup of the MSBuild SonarQube Runner on the Build Agent Machine](#setup-of-the-msbuild-sonarqube-runner-on-the-build-agent-machine)
 	- [Integrate with Team Build](#integrate-with-team-build)
 - [Additional Configurations](#additional-configurations)
 	- [Running SonarQube as a Service on Windows](#running-sonarqube-as-a-service-on-windows)
 	- [Configure SonarQube to use Microsoft SQL Database](#configure-sonarqube-to-use-microsoft-sql-database)
 	- [Secure the SonarQube Portal](#secure-the-sonarqube-portal)
-- [Appendix](#appendix)
-	- [Analysis Parameters](#analysis-parameters)
+- [Conclusion](#conclusion)
 
 ## Introduction
 
 “*SonarSource products generate process-level benefits, such as decreasing software development risk, raising software quality and improving team productivity*” .
 
-This guide aims to provide insightful and practical guidance around installing and configuring the **SonarQube™** (previously known as “**Sonar**”) platform on an existing Team Foundation Server 2013 setup.
+This guide aims to provide insightful and practical guidance around installing and configuring the **SonarQube™** (previously known as “**Sonar**”) platform for the analysis of C# and VB.NET projects.
 
 [Technical Debt](http://en.wikipedia.org/wiki/Technical_debt) has many causes: business pressures to release early with uncompleted features, software architecture does not allow for adaptation to changing business needs, inadequate testing and documentation, isolation of changes requiring future merging of the changes, and lack of scheduling for refactoring. Paying down on the debt is the only debt reduction strategy.
 
@@ -36,7 +35,7 @@ As we continue ongoing development, the cost of paying down on the technical deb
 
 SonarQube is an open source platform providing continuous inspection of your code quality. Through integration with Team Foundation Server and SonarQube you will be empowered to continuously inspect the technical debt, manage the debt, and pay down on the debt.
 
-The following are the details of getting the integration in place with an existing deployment of Team Foundation Server.
+The following are the details of getting the analysis of a .NET project in place either integrated in an existing deployment of Team Foundation Server or in a standalone command line way using the **MSBuild SonarQube Runner**.
 
 **>> NOTE >>** For more information on SonarQube, please refer to [Technical Debt](http://docs.sonarqube.org/display/SONAR/Technical+Debt) and [Evaluate your technical debt with Sonar](http://www.sonarqube.org/evaluate-your-technical-debt-with-sonar/).
 
@@ -74,7 +73,7 @@ Figure – Web browser prerequisites
 
 ### File Encoding
 
-SonarQube assumes that all of the source files have the same file encoding. Currently, the Team Build integration pieces expect this to be UTF-8, both by both client-side and server-side Java components. Non-compliance with the Universal Character Set and Transformation Format—8-bit, will result in incorrect analysis and display, when viewed in the SonarQube portal (when drilling down to view the source associated with an issue).
+SonarQube assumes that all of the source files have the same file encoding. Currently, the MSBuild SonarQube Runner expect this to be UTF-8. Non-compliance will result in incorrect analysis and display when viewed in the SonarQube portal (for example when drilling down to view the source associated with an issue).
 
 **>> NOTE >>** For the most up to date information on SonarQube requirements, check out the [requirements](http://docs.sonarqube.org/display/SONAR/Requirements).
 
@@ -154,14 +153,16 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 
 	- **>> NOTE >>** This walkthrough assumes the use of the BK VM. If, for example, you are using **SQLExpress** instead, you have to update the connection string. Example:
 
-		```console
-		*sonar.jdbc.url=jdbc:jtds:sqlserver://localhost/Sonar;instance=SQLEXPRESS;SelectMethod=Cursor*.
+		```
+		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost/Sonar;instance=SQLEXPRESS;SelectMethod=Cursor
 		```
 
 	- Alternatively if you are also looking for **integrated security** you can consider:
-		```console
-		*sonar.jdbc.url=jdbc:jtds:sqlserver://localhost:1433/sonar;instance=SQLEXPRESS;integratedSecurity=true;authenticationScheme=JavaKerberos*
+
 		```
+		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost:1433/sonar;instance=SQLEXPRESS;integratedSecurity=true;authenticationScheme=JavaKerberos
+		```
+
 	- Basic configuration of SonarQube consists of making a few updates to the **sonar.properties** file.
 	- This file is located in the conf folder located under the SonarQube installation folder.
 		Example: **C:\\SonarQube\\SonarQube-5.1\\conf**.
@@ -201,24 +202,34 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Please refer to [Building the Connection URL](https://msdn.microsoft.com/en-us/library/ms378428.aspx) for additional details on how to build SQL Server connection string for JDBC.
 	- Edit **sonar.properties**.
 	- Change the **SQL Server connection** string to use **integrated security**. 
-		```console
+
+		```
 		# Only the distributed jTDS driver is supported. 
-		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;**integratedSecurity=true**;”
+		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;integratedSecurity=true;”
 		```
+
 	- If you are using Sonar-runner for analysis, edit **sonar-runner.properties** and add the same configuration. 
-		```console
-		#----- Microsoft SQLServer
-		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;**integratedSecurity=true**;”
+
 		```
-6. **Download and install latest Csharp plugin**
-	- Download the latest sonar-csharp-plugin-X.Y.jar. At the time of writing, all versions of the C\# plugin are available from the [C\# Plugin](http://docs.sonarqube.org/display/PLUG/C%23+Plugin) page, on the SonarQube site
-	- . Version 4.0, or higher, of the plugin is supported for integration with TeamBuild. 
+		#----- Microsoft SQLServer
+		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;integratedSecurity=true;”
+		```
+
+6. **Download and install latest SonarQube C# plugin**
+	- Download the latest sonar-csharp-plugin-X.Y.jar. At the time of writing, all versions of the C\# plugin are available from the [C\# Plugin](http://redirect.sonarsource.com/plugins/csharp.html) page, on the SonarQube site.
+	- MSBuild and TeamBuild integration is supported since version 4.0 of the plugin.
 	- Locate the directory into which the SonarQube was installed e.g. **C:\\SonarQube\\SonarQube-5.1\\**. This directory will have an **extensions\\plugins\\** subdirectory.
 	- Copy **sonar-csharp-plugin-X.Y.jar** to this directory from the downloaded package above.
 	- Right-click the sonar sonar-csharp-plugin-X.Y.jar and select properties.
 	- Click the **Unblock** button to ensure the file is unblocked.
 7. **Run**
-	- Open Command Prompt and change directory (cd) to the extracted folder. Example: cd **C:\\SonarQube\\SonarQube-5.1\\bin\\windows-x86-64**.
+	- Open Command Prompt and change directory (`cd`) to the extracted folder.
+
+		Example:
+		```
+		cd C:\SonarQube\SonarQube-5.1\bin\windows-x86-64
+		```
+
 	- **>> NOTE >>** You need to run the file corresponding to your operating system.
 	- Run **StartSonar.bat**
 	- **>> NOTE>>** If you are prompted with a Windows Security Alert asking for network access, click on the Allow access button
@@ -230,7 +241,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		![](_img/SonarQube-Web-Portal.png)
 	- You should see the default SonarQube web page as shown above. If not, re-validate settings as shown in the previous sections.
 	- If the web server does not start, consult the logs in **C:\\SonarQube\\SonarQube-5.1\\logs** to determine possible issues.
-8. **Verify CSharp plugin version**
+8. **Verify the installed SonarQube C# plugin version**
 	- Login to SonarQube using admin credentials.
 		- If this is the first time you are using SonarQube, the default admin credentials are:
 			- Username: admin
@@ -242,113 +253,41 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		
 	**>> NOTE >>** The screenshot above is based version 3.5. You should see version 4.0 or later.
 
-	**>> NOTE >>** Please refer to section **Additional Configurations** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
+	**>> NOTE >>** Please refer to section **[Additional Configurations](#additional-configurations)** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
 
-## Setup the Build Agent Machine
-### Setup Sonar Runner
+## Setup of the MSBuild SonarQube Runner on the Build Agent Machine
 
-**>> NOTE >>** The recommended default launcher to analyze a project with SonarQube is **SonarQube Runner**.
 - You should install it on any machine that will launch SonarQube analysis (example: development machine and build agent).
-- In case of installing SonarQube Runner on a development machine or build agent, you need to make sure that Java SE Runtime Environment installed on that machine.
+- In case of installing MSBuild SonarQube Runner on a development machine or build agent, you need to make sure that Java SE Runtime Environment installed on that machine.
 - Java SE Runtime Environment installation is not required if Visual Studio 2015 with Android tooling/Cross platform tools are installed since JDK is being installed part of Visual Studio installation.
 
 1. **Extract**
-	- Download the latest **SonarRunner** from the SonarQube [downloads](http://www.sonarqube.org/downloads/).
-	- Right-click on the downloaded .zip sonar-runner file and click on the **Unblock** button.
+	- Download the latest **MSBuild SonarQube Runner** from the SonarQube [downloads](http://www.sonarqube.org/downloads/).
+	- Right-click on the downloaded .zip file and click on the **Unblock** button.
 
-		![](_img/Unlblock-Button.png)
-	- Unzip **sonar-runner-dist-xx** on to a drive.
-	Example: **C:\\SonarQube\\sonar-runner-2.4**
+		![](_img/Unblock-Button.png)
+	- Unzip **MSBuild.SonarQube.Runner-[version]** on to a drive.
+	Example: **C:\\SonarQube\\bin**
 
-2. **Configure SonarQube Runner**
-	- Edit **C:\\SonarQube\\sonar-runner-X.Y\\conf\\sonar-runner.properties** by specifying the following parameters to run against the SonarQube Server we set up earlier.
-	- Update the following properties:
-		- sonar.jdbc.username
-		- sonar.jdbc.password
-		- sonar.jdcp.url
+2. **Configure**
+	- Edit **C:\\SonarQube\\bin\\SonarQube.Analysis.xml** by specifying the following parameters to run against the SonarQube Server we set up earlier.
+	- If you are running SonarQube 5.1.x or less, uncomment and set the following properties:
+		- `sonar.jdbc.url`
+		- `sonar.jdbc.username`
+		- `sonar.jdbc.password`
 
-			![](_img/sonar-runner.properties.png)
-3. **Create and set environment variables**
-	- As per the [SonarQube installation instructions](http://docs.sonarqube.org/display/SONAR/Installing+and+Configuring+SonarQube+Runner), create a new **SONAR\_RUNNER\_HOME** environment variable set to installation directory, for example: **C:\\SonarQube\\sonar-runner-2.4.
+			![](_img/MSBuild.SonarQube.Runner.Settings.png)
 
-	- Add the **bin** directory to your Path. Example: **C:\\SonarQube\\sonar-runner-2.4\\bin**
+3. **OPTIONAL - Update the `%PATH%` environment variable**
 
-		![](_img/SONAR_RUNNER_HOME-Path.png)
-		![](_img/SONAR_RUNNER_HOME-Path-EnvVariable.png)
-	- As per SonarQube recommendations, to avoid running out of memory when analyzing large project increase the memory available to the JVM by setting the **SONAR\_RUNNER\_OPTS** environment variable. See [Analyzing with SonarQube Runner](http://docs.sonarqube.org/display/SONAR/Analyzing+with+SonarQube+Runner) on the SonarQube site for more information.
-		**>> NOTE >>** Setting this parameter is **unnecessary** in **Java 8** and may results in a runtime error from the JVM that causes the build to fail.
+	- Add the MSBuild SonarQube Runner executable to the `%PATH%` if you intend to use it from the command line:
 
-		![](_img/SONAR_RUNNER_OPTS.png)
-4. **Testing SonarQube Runner**
-	- Testing the SonarQube Runner is as simple as opening a command windows and running the app. You should be able to display the SonarQube Runner usage help.
-	- Open a new command window by pressing **Windows+R**, entering **cmd** and pressing Enter.
-	- Within the command window, enter **sonar-runner –h** and press Enter.You should see something similar to the following:
+		![](_img/MSBuild.SonarQube.Runner.PATH.png)
 
-		![](_img/Testing-the-SonarQube-Runner.png)
-	- You should see the default SonarQube Runner help text as shown above. If not, re-validate settings as shown in the previous sections.
-
-### Install SonarQube.MSBuild.Runner on the Build Machine
-
-**>> NOTE >>** Assumption: A build agent machine has been installed and configured
-
-1. **Download SonarQube Team Build 2013 Integration Components**
-	- Download the latest **SonarQube.MSBuild.Runner.zip** from the [C\# plugin page](http://redirect.sonarsource.com/plugins/csharp.html) on the SonarQube site.
-2. **Deploy additional Components on build agent**
-	- Create a new folder on disc and unzip the contents of **SonarQube.MSBuild.Runner.zip** into it e.g. **C:\\SonarQube\\bin**
-	- At a minimum, the folder should contain the following files:
-		- SonarQube.MSBuild.Runner.exe
-		- SonarQube.Integration.ImportBefore.targets
-	- Create the following directory if it does not already exist: %ProgramFiles(x86)%\\MSBuild\\12.0\\Microsoft.Common.Targets\\ImportBefore
-	- Copy SonarQube.Integration.ImportBefore.targets to the ImportBefore directory created in the previous step.
-
-### Configure the Build Agent Machine
-
-1. **Restart the Build Service**
-	- If you have amended the **%PATH%** variable as described in Setup Sonar Runner step 3, you will need to restart the Build Service.
-	- Run the **Team Foundation Server Administration Console** application.
-	- Click on the **Build Configuration** node in the tree
-	- Click on the **Restart** link:
-
-		![](_img/Build-Restart.png)
-	- Close the Team Foundation Server Administration Console.                                                                            |
-
-### Settings Encryption
+### Settings File Permissions
 
 - Storing passwords in clear text in unsecured settings files is **not** recommended.
-- Restrict access to the settings file by setting appropriate file permissions.
-- Alternatively, SonarQube supports a method for encrypting settings in the file. See [Settings Encryption](http://docs.sonarqube.org/display/SONAR/Settings+Encryption) on the SonarQube site for more information.
-
-### Manually verifying the Sonar Runner setup 
-
-1. **OPTIONAL - Run SonarQube manually**
-
-	**>> NOTE >>** This step describes how to manually verify the sonar-runner setup. This is only to test that the sonar runner has been correctly installed. Once you have validated the setup, the recommended approach is to use the Sonar.MSBuild.Runner as documented in *Integrate with Team Build*; you won’t need the sonar-runner.properties any longer
-
-	- From the Team Explorer, in Visual Studio, clone the Git repository containing SonarSource. It is located at <https://github.com/SonarSource/sonar-examples>.
-
-		![](_img/Team-Explorer-Git-Repo.png)
-	- Connect to the **sonar-examples** repository by double-clicking on that project in the Local Git Repositories. The solutions contained in this repository are proposed:
-
-		![](_img/Team-Explorer.png)
-	- Open the [projects](https://github.com/SonarSource/sonar-examples/tree/master/projects)/[multi-language](https://github.com/SonarSource/sonar-examples/tree/master/projects/multi-language)/dotNET/dotNet.sln solution in Visual Studio and build it. 
-	- Note that in the same folder as the solution, there is a sonar-project.properties file. In case you are curious about the sonar-project.properties file, please refer *Analysis Parameters*
-	- Open command prompt, navigate to the solution folder (%UserProfile%\\Source\\Repos\\sonar-examples\\projects\\multi-language\\dotNet), and run **sonar-runner**
-
-		![](_img/Sonar-Runner-Verification.png)
-	- Wait until the analysis complete. You should be able to see a status message for the completed analysis.
-
-		![](_img/Sonar-Runner-Analysis.png)
-	- To access the detailed report, navigate to **SonarQube portal.
-
-		```console
-		Example: [http://VSALM:9090](http://VSALM:9090)
-		```
-	- In the dashboard, you should be able to see a new project created with the name specified on the configuration file **.NET example**
-
-		![](_img/New-Project-Example.png)
-	- Click on the project from the project list and you will be able to get access to the detailed analysis report.
-
-		![](_img/New-Project-Example.png)
+- Restrict access to the **C:\\SonarQube\\bin\\SonarQube.Analysis.xml** file by setting appropriate file permissions.
 
 ## Integrate with Team Build
 ### Mapping Build Definitions to SonarQube projects
@@ -377,24 +316,29 @@ This means that a Build Definition must build and analyze all of the assemblies 
 
 2. **Edit advanced build settings**
 
-	- Click on the Process section, then on the **5. Advanced** expander in the **2. Build** section.
+	- Click on the Process section, then, within the **2. Build** section, expand the **5. Advanced** section.
 	- This will display the advanced build settings.
 
 		![](_img/Build-Settings.png)
 	- Set the following properties in the Advanced section:
-		- Set the **Pre-build script path** to the full path to SonarQube.MSBuild.Runner.exe.
-		- Set the **Pre-build script arguments** to contain the following three arguments:
+		- Set the **Pre-build script path** to the full path to MSBuild.SonarQube.Runner.exe.
+		- Set the **Pre-build script arguments** to contain the following four arguments:
+			- begin
 			- /key:{the **project key** of the SonarQube project to which the build definition relates}
 			- /name:{the **project name** of the SonarQube project}
 			- /version:{the **project version** of the SonarQube project}
+
 			*The aliases /k:, /n: and /v: can also be used.*
 
 			**>>NOTE >>** If any of the arguments contain spaces then that argument needs to be surrounded by double-quotes e.g. **/name:”My Project Name”**.
 		
 		- Click on the expander for the **2. Advanced** section under **3. Test** to display the advanced test settings.
-		- Set the **Post-test script path** to the full path to SonarQube.MSBuild.Runner.exe
+		- Set the **Post-test script path** to the full path to MSBuild.SonarQube.Runner.exe
 		
-			**>> NOTE >>** The preand postscript paths refer to the same executable.
+			**>> NOTE >>** The pre and post script paths refer to the same executable.
+
+		- Set the **Post-test script arguments** to contain the following argument:
+			- end
 
 3. **OPTIONAL - Configure code coverage**
 
@@ -413,7 +357,7 @@ This means that a Build Definition must build and analyze all of the assemblies 
 
 			**>>WARNING >>** It is possible to drill down through the **1. Automated tests** sections to locate a drop-down for **Type of run settings** in which one of the options is **CodeCoverageEnabled**. However, at the time of writing choosing **CodeCoverageEnabled** from the drop-down does not generate coverage results, due to a bug. See [TFS 2013 - No Code Coverage Results](http://stackoverflow.com/questions/24016217/tfs-2013-no-code-coverage-results) on StackOverflow for more info. 
 
-4. **OPTIONAL - Validate and save build settings**
+4. **Validate and save build settings**
 	- The following screenshot shows how the build definition should look at this point.
 
 		![](_img/Validate-And-Save-Build-Settings.png)
@@ -448,50 +392,32 @@ This means that a Build Definition must build and analyze all of the assemblies 
 
 ### Troubleshooting
 
-#### Analysis build fails if the build definition name contains brackets
-
-Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/SONARMSBRU), [Issue Sonar MS Bru 12](http://jira.sonarsource.com/browse/SONARMSBRU-12) for details.
-
 #### Build did not complete successfully and build summary contains one or more errors.
 
 Try modifying the build definition to remove the SonarQube.MSBuild.Runner.exe entries in the pre- and post- script sections. If the build completes successfully, then the errors are related to analysis.
 
 Most analysis-related configuration or execution errors will cause the build to fail and will be appear on the Build Summary. Additional information can be found by viewing the logs or diagnostic information (i.e. by clicking on **View Log**, or **Diagnostics** at the top of the Build Summary page).
 
-#### Build fails due to invalid path when using brackets
-
-**Steps to reproduce**
-- Create a build definition with name that included () for example: FabrikamFiber (Dev)
-- Configure it to use Sonar bootstrap as mentioned in the early adopter guide.
-- Queue a new build
-
-**Expected result**
-- Build to kick-off analysis using SonarQube
-
-**Actual result**
-- Failed due to path concatenation error, the (Dev) are converted to %28Dev%29 gives a wrong path and the integration targets can’t load the Task.dll
-
-	![](_img/Build-Fails-Error.png)
-
-**Workaround**
-- Rename the build definition and remove (Dev) part.
-
-#### IsTestByFileName task fails intermittently due to file locking issue
-Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/SONARMSBRU), issue <http://jira.sonarsource.com/browse/SONARMSBRU-11> for details.
-
 # Additional Configurations
 
 ### Running SonarQube as a Service on Windows
 
-1. **Uninstall*
+1. **Uninstall**
 	- To **uninstall** the NT services, run the following batch file using Run As Administrator.
-		```console
-		Example: **\<SonarQube\_Install\_Directory\>\\bin\\windows-x86-32\\UninstallNTService.bat**|
+
+		Example:
+
 		```
+		<SonarQube_Install_Directory>\bin\windows-x86-64\UninstallNTService.bat
+		```
+
 2. **Install**
 	- To **install** the NT services, run the following batch file using Run As Administrator.
-		```console
-		Example: **\<SonarQube\_Install\_Directory\>\\bin\\windows-x86-32\\InstallNTService.bat
+
+		Example:
+
+		```
+		<SonarQube_Install_Directory>\bin\windows-x86-64\InstallNTService.bat
 		```
 
 		![](_img/Install-NT-Service.png)
@@ -503,8 +429,11 @@ Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/S
 4. **Start service**
 	- Make sure you have closed all running non-service instances of **SonarQube Server.**
 		- To **start** the service use the Services Console or run the following batch file using Run As Administrator.
-		```console
-		Example: **\<SonarQube\_Install\_Directory\>/bin/windows-x86-32/StartNTService.bat**
+
+		Example:
+
+		```
+		<SonarQube_Install_Directory>\bin\windows-x86-64\StartNTService.bat
 		```
 
 		![](_img/StartNTService-Bat.png)
@@ -517,8 +446,9 @@ Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/S
 6. **Inter-service dependency**
 	- If **SonarQube server** is installed on the same machine as SQL Server with the SonarQube database, you need to make sure that SQL Server is started before the SonarQube service. In addition, the default jdbc driver install with SonarQube requires the SQL Brower Service to be running.
 	- Assuming you’re using the default SQL Server instance **MSSQLSERVER**, open the command prompt in administrative mode and run the following command to ensure both the SQL Server and SQL Browser Service are started before the SonarQube service.
-		```console
-		Example: **sc config SonarQube depend=MSSQLSERVER/SQLBrowser**
+
+		```
+		Example: sc config SonarQube depend=MSSQLSERVER/SQLBrowser
 		```
 
 		![](_img/sc-config-sonarqube-dpend-sqlbrowser.png)
@@ -539,12 +469,14 @@ Refer to [SonarQube MSBuild Runner on Jira](http://jira.sonarsource.com/browse/S
 
 Before you get to the task of creating a new database for SonarQube, you need to complete a few preparations.
 
-1. **Launch SSMS
+1. **Launch SSMS**
 	- Launch **SQL Server Management Studio** (SSMS).
 	- Connect to the SQL Server instance on which you plan to create the database.
-		```console
-		Example: **.\\SQLExpress**
+
 		```
+		Example: .\\SQLExpress
+		```
+
 2. **Check collation**
 	- Right-click on the **database server** node and select **Properties**. 
 
@@ -617,16 +549,9 @@ Before you get to the task of creating a new database for SonarQube, you need to
 
 By default, the SonarQube portal allows anonymous access, although SonarQube does provide a complete authentication and authorization mechanism to manage security. As users of the portal will be able to view the analyzed source code, it is recommended that the anonymous access to the site not be permitted.
 
-See [Security](http://docs.sonarqube.org/display/SONAR/Settings+Encryption) section on the SonarQube site for more information.
+See [Security](http://docs.sonarqube.org/display/SONAR/Security) section on the SonarQube site for more information.
 
-## Appendix
-### Analysis Parameters
-
-For a complete lists of Parameters that you use to configure project analysis , please refer to http://docs.sonarqube.org/display/SONAR/Analysis+Parameters.
-
-**>> NOTE >>** For analysis builds integrated with Team Build, as described in the [Installation and Configuration](#installation-and-configuration), the **sonar-project.properties** is generated as part of the build. In this case, the analysis configuration is done via the SonarQube portal.
-
-## In Conclusion
+## Conclusion
 
 During our adventure of setting up SonarQube with an existing deployment of Team Foundation Server, we introduced you to Technical Debt; we gave you the prerequisites and installation configurations, and covered the topologies. We hope we have achieved our goals for the guidance, get you up and running quickly with SonarQube and Team Foundation Server so you can start your analysis of your technical debt and begin your debt reduction strategy.
 
