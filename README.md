@@ -16,7 +16,9 @@
 	- [Installation Topologies](#installation-topologies)
 	- [Setup SonarQube Server](#setup-sonarqube-server)
 	- [Setup of the MSBuild SonarQube Runner on the Build Agent Machine](#setup-of-the-msbuild-sonarqube-runner-on-the-build-agent-machine)
-	- [Integrate with Team Build](#integrate-with-team-build)
+- [Anaylze .NET projects](#analyze-.net-projects)
+	- [From The Command Line](#from-the-command-line)
+	- [From Team Foundation Server 2013](#from-team-foundation-server-2013)
 - [Additional Configurations](#additional-configurations)
 	- [Running SonarQube as a Service on Windows](#running-sonarqube-as-a-service-on-windows)
 	- [Configure SonarQube to use Microsoft SQL Database](#configure-sonarqube-to-use-microsoft-sql-database)
@@ -289,7 +291,52 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 - Storing passwords in clear text in unsecured settings files is **not** recommended.
 - Restrict access to the **C:\\SonarQube\\bin\\SonarQube.Analysis.xml** file by setting appropriate file permissions.
 
-## Integrate with Team Build
+# Analyze .NET Projects
+
+## From The Command Line
+
+The following assumes that `MSBuild.SonarQube.Runner.exe` has been added to the `%PATH%`.
+If that is not your case, simply specify the absolute path to it in both the begin end end phase command.
+
+1. **Run the MSBuild.SonarQube.Runner.exe begin phase**
+
+	```
+	MSBuild.SonarQube.Runner.exe begin /key:{SonarQube project key} /name:{SQ project name} /version:{SQ project version}
+	```
+
+	The begin phase takes four arguments:
+
+	- begin
+	- /key:{the **project key** of the SonarQube project to which the build relates}
+	- /name:{the **project name** of the SonarQube project}
+	- /version:{the **project version** of the SonarQube project}
+
+	*The aliases /k:, /n: and /v: can also be used.*
+
+	**>>NOTE >>** If any of the arguments contain spaces then that argument needs to be surrounded by double-quotes e.g. **/name:”My Project Name”**.
+
+2. **Launch your normal project build**
+
+	Basic example:
+
+	```
+	msbuild
+	```
+
+	Example, with nuget:
+
+	```
+	nuget restore
+	msbuild
+	```
+
+3. **Run the MSBuild.SonarQube.Runner.exe end phase**
+
+	```
+	MSBuild.SonarQube.Runner.exe end
+	```
+
+## From Team Foundation Server 2013
 ### Mapping Build Definitions to SonarQube projects
 
 SonarQube uses *Projects* to organize analysis results by logical application, where an application can consist of a number of *modules* (assemblies). It is not currently possible to upload partial analysis results for a SonarQube Project. For example, if SonarQube project *X* consists of assemblies *A*, *B* and *C*, it is not possible to build, analyze and upload data for *A* and *B*, and later to build, analyze and upload data for *C*.
