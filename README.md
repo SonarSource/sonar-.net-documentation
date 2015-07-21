@@ -647,6 +647,8 @@ Perform the following steps to upgrade from version 0.9 of the SonarQube MSBuild
 4. Delete *SonarQube.Integration.ImportBefore.targets* from *%ProgramFiles(x86)%\MSBuild\12.0\Microsoft.Common.Targets\ImportBefore*.
 5. Upgrade any existing build definitions.
 	- The name of the executable in the **Pre-build script path** and the **Post-test script path** fields should be changed from *SonarQube.MSBuild.Runner.exe* to *MSBuild.SonarQube.Runner.exe*.
+	- Add *begin* to the **Pre-build script arguments**
+	- Add *end* to the **Post-test script arguments**.
 
 ## Optional upgrade steps - remove the sonar-runner
 It is not necessary to uninstall the manually-installed version of the sonar-runner that was required by the v0.9 version. However, if you do wish to do so then perform the following steps:
