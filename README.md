@@ -221,7 +221,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 6. <a name="installLatestPluginAnchor"></a>**Download and install latest SonarQube C# plugin**
 
 	- Download the latest sonar-csharp-plugin-X.Y.jar. At the time of writing, all versions of the C\# plugin are available from the [C\# Plugin](http://redirect.sonarsource.com/plugins/csharp.html) page, on the SonarQube site.
-	- Use version 4.1 or higher of the plugin (version 4.0 of the plugin supported the pre-release version of SonarQube MSBuild Runner).
+	- Use version 4.1 or higher of the plugin.
 	- Locate the directory into which the SonarQube was installed e.g. **C:\\SonarQube\\SonarQube-5.1\\**. This directory will have an **extensions\\plugins\\** subdirectory.
 	- Copy **sonar-csharp-plugin-X.Y.jar** to this directory from the downloaded package above.
 	- Right-click the sonar sonar-csharp-plugin-X.Y.jar and select properties.
@@ -257,7 +257,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 
 		![](_img/Update-Center.png)
 		
-	**>> NOTE >>** The screenshot above is based version 3.5. You should see version 4.0 or later.
+	**>> NOTE >>** The screenshot above is based version 3.5. You should see version 4.1 or later.
 
 	**>> NOTE >>** Please refer to section **[Additional Configurations](#additional-configurations)** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
 
