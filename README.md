@@ -16,7 +16,7 @@
 	- [Installation Topologies](#installation-topologies)
 	- [Setup SonarQube Server](#setup-sonarqube-server)
 	- [Setup of the MSBuild SonarQube Runner on the Build Agent Machine](#setup-of-the-msbuild-sonarqube-runner-on-the-build-agent-machine)
-- [Analyze .NET projects](#analyze-.net-projects)
+- [Analyze .NET projects](#analyze-net-projects)
 	- [From The Command Line](#from-the-command-line)
 	- [From Team Foundation Server 2013](#from-team-foundation-server-2013)
 - [Additional Configurations](#additional-configurations)
