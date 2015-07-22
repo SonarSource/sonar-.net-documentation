@@ -337,6 +337,7 @@ If that is not your case, simply specify the absolute path to it in both the *be
 	msbuild
 	```
 
+	**>>NOTE >>** make sure to run MSBuild.SonarQube.Runner in a "MSBuild console", or a "VS Developer Command Prompt" otherwise you will not be able to access MSBuild command and you may get an error similar to "'msbuild' is not recognized as an internal or external command,operable program or batch file."
 3. **Run the MSBuild.SonarQube.Runner.exe end phase**
 
 	```
