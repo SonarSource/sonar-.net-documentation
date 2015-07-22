@@ -584,7 +584,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
 3. **Test connection**
 	- Launch Visual Studio and select **Tools**, **Connect to Database...**
 
-		![](_img/New-Database-User-Mapping.png)
+		![](_img/Test-Connection-01-ContextMenu.png)
 	- Select **Microsoft SQL Server** as the Data Source.
 
 		![](_img/New-Database-SQLServer-As-Source.png)
