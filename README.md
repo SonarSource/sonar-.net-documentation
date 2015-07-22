@@ -25,6 +25,7 @@
 	- [Secure the SonarQube Portal](#secure-the-sonarqube-portal)
 - [Conclusion](#conclusion)
 - [Appendix 1: Upgrading from v0.9 of the SonarQube MSBuild Runner](#upgradeFrom09Anchor)
+- [Appendix 2: Configuring the MSBuild SonarQube Runner](#configuringMSBuildRunnerAnchor)
 
 ## Introduction
 
@@ -318,6 +319,8 @@ If that is not your case, simply specify the absolute path to it in both the *be
 	*The aliases /k:, /n: and /v: can also be used.*
 
 	**>>NOTE >>** If any of the arguments contain spaces then that argument needs to be surrounded by double-quotes e.g. **/name:”My Project Name”**.
+
+	See [Configuring the MSBuild SonarQube Runner](#configuringMSBuildRunnerAnchor) below for more information on passing additional settings.
 
 2. **Launch your normal project build**
 
@@ -659,3 +662,126 @@ It is not necessary to uninstall the manually-installed version of the sonar-run
 4. Delete the SONAR_RUNNER_OPTS enviornment variable.
 5. Restart the TFS Build Service.
 	- If you have amended the environment variables then you will need to restart the Build Service so it uses the modified set of variables.
+
+
+<a name="configuringMSBuildRunnerAnchor">
+# Appendix 2: Configuring the MSBuild SonarQube Runner
+</a>
+
+## Contents
+
+- [Supplying additional analysis settings](#supplying-additional-analysis-settings)
+- [Classifying projects as test projects](#classifying-projects-as-test-projects)
+- [Excluding artefacts from analysis](#excluding-artefacts-from-analysis)
+
+## Supplying additional analysis settings
+
+The analysis process can be configured by passing additional analysis settings to the MSBuild SonarQube Runner.
+Global settings can either be passed on the command line or in a settings file.
+Project-level settings can be set in the MSBuild project file.
+
+### Passing additional global settings on the command line
+
+Individual global settings can be supplied on the command using the */d* switch: 
+
+```
+	MSBuild.SonarQube.Runner.exe /v:1.0 /n:"My project" /k:my.project /d:sonar.host.url=http://myServer:9001
+```
+
+### Passing additional global settings in a settings file
+
+Additional settings can also be supplied in a settings file. The location of the settings file can be specified on the command line using the */s* switch:
+
+```
+	MSBuild.SonarQube.Runner.exe /v:1.0 /n:"My project" /k:my.project /s:C:\SharedSettings\SonarQube.Analysis.xml
+```
+
+If the */s* command-line switch is not supplied then the MSBuild SonarQube Runner will look for a default settings file called *SonarQube.Analysis.xml* in the same directory as the MSBuild.SonarQube.Runner executable file.
+The default settings file shipped with the MSBuild SonarQube Runner contains placeholders for the most commonly-required settings and can be used as a template for custom settings files.
+
+### Passing additional non-global settings in a project file
+
+Non-global (i.e. settings specific to a particular MSBuild project) can be specified in the MSBuild project file for the project.
+For example, the *MSBuild.SonarQube.Integration.targets* file sets the *sonar.stylecop.projectFilePath* property as follows:
+
+```xml
+    <ItemGroup>
+      <SonarQubeSetting Include="sonar.stylecop.projectFilePath">
+        <Value>$(MSBuildProjectFullPath)</Value>
+      </SonarQubeSetting>
+    </ItemGroup>
+```
+
+It should only be necessary to use this mechanism in cases were a plugin requires different values for each project that is being analysed, as is the case with the *StyleCop* plugin.
+
+
+### Order of precedence of analysis settings
+If the same setting is supplied in multiple places then the value that is used is determined using the following order of precedence (highest to lowest):
+
+	- command line settings specified using /d
+	- settings in a SonarQube.Analysis.xml file (either the default settings file or one specified using the */s* command-line switch)
+	- settings specified in an MSBuild project file
+	- settings fetched from the SonarQube server
+
+
+## Classifying projects as test projects
+
+SonarQube analyses test projects and product projects differently so it is important that projects are correctly classified as being either test or product projects.
+
+The MSBuild SonarQube Runner will automatically recognise MSTest unit test projects as being test projects (because of the presence of a well-known guid in the project file).
+
+Other test projects are recognised by applying a regular expression to the full path of the project file. The regular expression can configured in the SonarQube portal on the settings page for the C# plugin:
+
+![](_img/SonarQube-Portal-MSBuild-TestProjectPattern.png)
+
+Figure – MSBuild settings tab of the C# plugin
+
+
+Finally, it is possible to manually classify a project by setting the MSBuild property *SonarQubeTestProject*, e.g.
+
+```xml
+	<PropertyGroup>
+		<!-- Mark the project as being a test project -->
+		<SonarQubeTestProject>true</SonarQubeTestProject>
+	</PropertyGroup>
+```
+
+
+## Excluding artefacts from analysis
+
+### Excluding projects from analysis
+
+Certain types of project will automatically be excluded from analysis. For example, [Microsoft Fakes](https://msdn.microsoft.com/en-us/library/hh549175.aspx) generates additional projects during build. These auto-generated projects will not be analysed.
+
+Individual projects can be excluded from analysis by setting the MSBuild property *SonarQubeExclude* to *true* as follows:
+
+```xml
+	<PropertyGroup>
+		<!-- Exclude the project from analysis -->
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</PropertyGroup>
+```
+
+### Excluding individual files from analysis
+
+Files that are generated by custom tools within Visual Studio are automatically excluded from analysis, such as the *xxx.Designer.cs* file generated from a .resx file:
+
+```xml
+	<Compile Include="Resources.Designer.cs">
+		<AutoGen>True</AutoGen>
+		<DesignTime>True</DesignTime>
+		<DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+```
+
+These files are excluded because they are marked as generated by Visual Studio.
+It is possible to manually exclude a specific file from analysis by setting the MSBuild metadata item *SonarQubeExclude* to *true* as follows:
+
+```xml
+	<ItemGroup>
+		<Compile Include="MyFile.cs">
+			<!-- Exclude the file from analysis -->
+			<SonarQubeExclude>true</SonarQubeExclude>
+		</Compile>
+	</ItemGroup>
+```
