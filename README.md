@@ -223,7 +223,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Use version 4.1 or higher of the plugin.
 	- Locate the directory into which the SonarQube was installed e.g. **C:\\SonarQube\\SonarQube-5.1\\**. This directory will have an **extensions\\plugins\\** subdirectory.
 	- Copy **sonar-csharp-plugin-X.Y.jar** to this directory from the downloaded package above.
-	- Right-click the sonar sonar-csharp-plugin-X.Y.jar and select properties.
+	- Right-click the sonar sonar-csharp-plugin-X.Y.jar and select **properties**.
 	- Click the **Unblock** button to ensure the file is unblocked.
 
 7. **Run**
@@ -249,8 +249,11 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 8. **Verify the installed SonarQube C# plugin version**
 	- Login to SonarQube using admin credentials.
 		- If this is the first time you are using SonarQube, the default admin credentials are:
-			- Username: admin
-			- Password: admin
+	
+		    `- Username: admin`
+
+			`- Password: admin`
+
 	- If you log in using the default credentials, it is recommended that you change the password.
 	- Verify that the C\# X.Y plugin has been correctly deployed, Navigate to **Settings \>System \> Update Center**.
 
