@@ -1,4 +1,4 @@
-# Analyze .Net Projcts From Team Foundation Server 2013
+# Analyze .Net Projects From Team Foundation Server 2013
 ### Mapping Build Definitions to SonarQube projects
 
 SonarQube uses *Projects* to organize analysis results by logical application, where an application can consist of a number of *modules* (assemblies). It is not currently possible to upload partial analysis results for a SonarQube Project. For example, if SonarQube project *X* consists of assemblies *A*, *B* and *C*, it is not possible to build, analyze and upload data for *A* and *B*, and later to build, analyze and upload data for *C*.
