@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 “*SonarSource products generate process-level benefits, such as decreasing software development risk, raising software quality and improving team productivity*” .
 

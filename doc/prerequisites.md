@@ -1,8 +1,8 @@
-## Prerequisites 
+# Prerequisites 
 
 At the time of this writing, the current version of SonarQube, v5.1, had the following requirements.
 
-### Java
+## Java
 A Java runtime is required for SonarQube to run. Supported JVMs:
 -   Java (Oracle JRE 7 or greater or OpenJDK 7 or greater).
 
@@ -25,9 +25,7 @@ Figure – Web browser prerequisites
 ### Hardware
 
 -   At least 1GB RAM
-
 -   Disk space requirements vary dependent upon the size and number of projects you wish to analyze using SonarQube. As a point of reference, [Nemo](http://nemo.sonarsource.org/), the public instance of SonarQube, currently analyzes over 15 million lines of source code, which includes four years of history. Nemo is currently using about 10GB of disk space.
-
 -   SonarQube relies on intensive hard drive I/O for indexing purposes. You should install SonarQube on the most performant hard drive you have at your disposal for best results.
 
 ### File Encoding
