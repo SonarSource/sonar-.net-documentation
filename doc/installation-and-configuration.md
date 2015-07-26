@@ -1,22 +1,22 @@
-## Installation and Configuration
-### Installation Topologies 
-#### Minimum Deployment
+# Installation and Configuration
+## Installation Topologies 
+### Minimum Deployment
 
 -   All TFS Services, SQL Server and SonarQube, including Sonar Runner and Build Controller) hosted on a single computer.
 -   Suitable for research, dogfooding and demonstration of entire end-to-end workflow on one machine.
 
 	**>> NOTE >>** In this guide, we will demonstrate the installation and configurations using [Brian Keller's VM](http://aka.ms/ALMVMs), with all components installed on one box. 
 
-#### Medium Deployment
+### Medium Deployment
 
 - TFS Services and SQL Server are hosted on a single computer and SonarQube (all components) on a separate machine.
 - Suitable for evaluation in production or near-production environments.
 
-### Recommended platform configurations
+## Recommended platform configurations
 
 Refer to [System requirements for Team Foundation Server](https://msdn.microsoft.com/en-us/library/dd578592.aspx) and the [TFS Planning, Disaster Avoidance and Recovery, and TFS on Azure IaaS Guide](http://vsarplanningguide.codeplex.com/) for information on hardware and capacity planning recommendations for your Team Foundation Server environment.
 
-### Running SonarQube on Hyper-V and Azure IaaS
+## Running SonarQube on Hyper-V and Azure IaaS
 
 While preparing a Virtual Machine that will host SonarQube database, portal and/or Runner workloads take into account the following guidance:
 
@@ -60,11 +60,10 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		![](_img/Java-SE-Runtime-Environment.png)
 3. **Extract**
 
-	**>> NOTE >>** Before installing and configuring SonarQube install and configure SQL Server according to the instructions in the section [Additional Configurations](#additional-configurations).
+	**>> NOTE >>** Before installing and configuring SonarQube install and configure SQL Server according to the instructions in the section [Additional Configurations](additional-configurations.md).
 
 	- Right-click on **sonarqube-5.1.zip**, select Properties and then click on the **Unblock** button
-
-		![](_img/sonarqube-5.1-Properties.png)
+![](_img/sonarqube-5.1-Properties.png)
 	- Unzip **SonarQube-x.x.zip** on to a drive, for example use **C:\\SonarQube\\SonarQube-5.1**.
 
 		![](_img/Unzip-SonarQube-x.x.zip.png)
@@ -178,7 +177,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		
 	**>> NOTE >>** The screenshot above is based version 3.5. You should see version 4.1 or later.
 
-	**>> NOTE >>** Please refer to section **[Additional Configurations](#additional-configurations)** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
+	**>> NOTE >>** Please refer to section **[Additional Configurations](additional-configurations.md)** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
 
 ## Setup of the MSBuild SonarQube Runner on the Build Agent Machine
 
