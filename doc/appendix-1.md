@@ -1,6 +1,4 @@
-<a name="upgradeFrom09Anchor">
 # Appendix 1: Upgrading from v0.9 of the SonarQube MSBuild Runner
-</a>
 
 ## Overview of the differences between v0.9 and v1.0
 The integration pieces changed significantly from the v0.9 preview version. The main changes in the v1.0 release are as follows:

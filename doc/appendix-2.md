@@ -1,6 +1,4 @@
-<a name="configuringMSBuildRunnerAnchor">
 # Appendix 2: Configuring the MSBuild SonarQube Runner
-</a>
 
 ## Contents
 
