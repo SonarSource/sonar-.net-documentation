@@ -20,7 +20,7 @@ If that is not your case, simply specify the absolute path to it in both the *be
 
 	**>>NOTE >>** If any of the arguments contain spaces then that argument needs to be surrounded by double-quotes e.g. **/name:”My Project Name”**.
 
-	See [Configuring the MSBuild SonarQube Runner](#configuringMSBuildRunnerAnchor) below for more information on passing additional settings.
+	See [Configuring the MSBuild SonarQube Runner](appendix-1.md) below for more information on passing additional settings.
 
 2. **Launch your normal project build**
 
