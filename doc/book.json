@@ -1,0 +1,8 @@
+{ 
+	"gitbook": ">=2.0.0",
+	"title": "SonarQube Setup Guide for .NET users",
+	"language": "en",
+	"pdf": {
+        "fontSize": 10
+    }
+}
