@@ -1,10 +1,11 @@
-﻿# Analyze .Net Projects From Team Foundation Server 2013/2015
+# Analyze .Net Projects From Team Foundation Server 2013/2015
 
 ## Overview
-The [build system](https://msdn.microsoft.com/en-us/library/ms181709(v=vs.120).aspx)) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
+The [build system](https://msdn.microsoft.com/en-us/library/ms181709(v=vs.120).aspx) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
 Builds are defined and customised using XAML.
-TFS 2015 [introduced](https://msdn.microsoft.com/en-us/Library/vs/alm/Build/overview) a new build system but also supports the legacy "XAML build" system from TFS 2013.
-This section describes how to set up to configure a XAML build in TFS 2013 or TFS 2015 to include code analysis.
+TFS 2015 introduced a [new build system](https://msdn.microsoft.com/en-us/Library/vs/alm/Build/overview) but also supports the legacy "XAML build" system from TFS 2013.
+
+This document describes how to set up to configure a XAML build in TFS 2013 or TFS 2015 to include code analysis. It also gives an outline of how to set up analysis using the new build system.
 
 
 ### Mapping Build Definitions to SonarQube projects
@@ -20,21 +21,18 @@ This means that a Build Definition must build and analyze all of the assemblies 
 The settings required to configure a XAML build to perform code analysis are the same for TFS 2013 and TFS 2015.
 However, if you are using the TFS 2015 XAML build agent then there are additional considerations:
 * when analysing data stored in an on-premise TFS installation, the build agent must also have the TFS 2013 Object Model installed
-* a TFS 2015 build agent cannot currently be used to analyse code stored in Visual Studio Online ("VSO")
+* a TFS 2015 build agent cannot currently be used to analyse code stored in Visual Studio Online ("VSO").
 See the following sub-sections for more information.
 
 #### Installing the TFS 2013 Object Model on a TFS 2015 Build Agent
-If you are using a TFS 2015 XAML build agent to analyze code stored in an on-premise TFS server then you will need to install the TFS 2013 Object Model ("OM") on the build agent.
-This is because the MSBuild.SonarQube.Runner is built against the TFS 2013 assemblies which are not installed by default on a TFS 2015 build agent.
-
-Microsoft provide an installer for the OM that can be downloaded and installed as follows:
+Microsoft provide an installer for the object model that can be downloaded and installed as follows:
 * Browse to the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/)
 * Search for "Team Foundation Server Object Model"
 * Choose the appropriate version of the 2013 object model for the updates you have applied to your TFS installation
 * Download and run the installer
 
 
-### Analysing code stored in Visual Studio Online ("VSO") requires a TFS 2013 build agent
+#### Analyzing code stored in Visual Studio Online ("VSO") requires a TFS 2013 build agent
 If you are analysing code stored in VSO using a XAML build then at present you must use TFS 2013 build agent.
 This is a known issue that is being tracked here [http://jira.sonarsource.com/browse/SONARMSBRU-73].
 
@@ -151,17 +149,16 @@ The following steps provide an outline of how to set this up:
 
 * Create an on-premise VSO 2015 build agent using the instructions [here](https://msdn.microsoft.com/Library/vs/alm/Build/agents/windows)
 * Install the *MSBuild.SonarQube.Runner* on the build agent
-* Create a build new build definition that includes *MSBuild* and (optionally) *Visual Studio Test* steps
+* Create a new build definition that includes the *MSBuild* and (optionally) *Visual Studio Test* steps
 * Add *Command Line* build step before the *MSBuild* step and after the *Visual Studio Test* step
 * In the pre-build command line:
   * set the *Tool* field to point to the *MSBuild.SonarQube.Runner.exe*
-  * supply the necessary arguments in the *Arguments* field i.e. */key:*, */name:* and */version:*
-  * supply the the SonarQube server URL and credentials either in the *Arguments* field or in a settings file
-e.g. begin /k:my.project /n:"My Project" /v:1.0 /d:sonar.host.url=http://mySonarQube:9000
+  * supply the necessary arguments in the *Arguments* field e.g. *begin */key:my.project /name:"My Project" /version:1.0*
+  * supply the the SonarQube server URL and credentials either in the *Arguments* field or in a settings file e.g. */d:sonar.host.url=http://mySonarQube:9000*
 
 * In the post-build command:
   * set the *Tool* field to point to the *MSBuild.SonarQube.Runner.exe*
-  * set the *Arguments* field to "end"
+  * set the *Arguments* field to *end*
 * Save the build definition
 
 The following screenshot gives an example of how the build definition would look.
