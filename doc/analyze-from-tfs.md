@@ -25,7 +25,8 @@ However, if you are using the TFS 2015 XAML build agent then there are additiona
 See the following sub-sections for more information.
 
 #### Installing the TFS 2013 Object Model on a TFS 2015 Build Agent
-Microsoft provide an installer for the object model that can be downloaded and installed as follows:
+Installing Visual Studio 2013 will install the necessary assemblies on the build agent.
+Alternatively, Microsoft provide a separate installer for the object model that can be downloaded and installed as follows:
 * Browse to the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/)
 * Search for "Team Foundation Server Object Model"
 * Choose the appropriate version of the 2013 object model for the updates you have applied to your TFS installation
