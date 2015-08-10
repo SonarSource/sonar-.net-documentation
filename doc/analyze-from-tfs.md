@@ -1,4 +1,4 @@
-# Analyze .Net Projects From Team Foundation Server 2013/2015
+# Analyze .Net Projects From Team Foundation Server 2013 and 2015
 
 ## Overview
 The [build system](https://msdn.microsoft.com/en-us/library/ms181709(v=vs.120).aspx) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
@@ -160,6 +160,8 @@ The following steps provide an outline of how to set this up:
   * set the *Tool* field to point to the *MSBuild.SonarQube.Runner.exe*
   * set the *Arguments* field to *end*
 * Save the build definition
+
+By default a new build definition will run both *debug* and *release* builds.  SonarQube can only analyse one type of build at a time so you will need to pick one or the other (*Variables* tab, *BuildConfiguration* property).
 
 The following screenshot gives an example of how the build definition would look.
 ![](_img/Build-vNext-example-definition-with-cmds.png)
