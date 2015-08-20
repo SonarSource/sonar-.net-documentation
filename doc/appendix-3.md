@@ -1,4 +1,4 @@
-# Appendix 3: Advanced MSBuild SonarQube Runner configuration options
+# Appendix 3: Advanced MSBuild SonarQube Runner configuration
 
 This appendix contains additional information on how the MSBuild SonarQube Runner can be configured to work effectively in more complex real-world scenarios.
 
@@ -11,8 +11,10 @@ This allows considerable flexibility in deciding whether a project should be exc
 For example, the same MSBuild project may be included in multiple different solutions.
 In this situation it is generally desirable that the MSBuild project should only be analysed once e.g.
 ```
-Solution1 contains projects *A*, *B* and *X*. All of the projects should be analysed as part of SonarQube project *example.sqproject1*
-Solution2 contains projects *C*, *D* and *X*. Only projects *C* and *D* should be analysed as part of SonarQube project *example.sqproject2*
+Solution1 contains projects *A*, *B* and *X*.
+	All of the projects should be analysed as part of SonarQube project *example.sqproject1*
+Solution2 contains projects *C*, *D* and *X*.
+	Only projects *C* and *D* should be analysed as part of SonarQube project *example.sqproject2*
 ```
 
 Two possible methods of handling this scenario using a small amount of customisation and configuration are shown below.
@@ -42,10 +44,12 @@ The following targets file will conditionally set *SonarQubeExclude* based on a 
 </Project>
 ```
 
-This custom targets file would be imported using one of the standard MSBuild mechanisms e.g. either explicitly <Import>ed into the relevant projects, 
-or dropped in a location in which it will be automatically imported such as *%ProgramFiles(x86)%\MSBuild\*[MSBuild version]*\Microsoft.Common.Targets\ImportBefore\*.
+This custom targets file would be imported using one of the standard MSBuild mechanisms e.g. either explicitly imported into the relevant projects, 
+or dropped in a location in which it will be automatically imported such as *%ProgramFiles(x86)%\MSBuild\**[MSBuild version]**\Microsoft.Common.Targets\ImportBefore\*.
 
-At build time, the relevant SonarQube project key would be specified on the command line e.g.
+At build time, the relevant SonarQube project key would be passed to MSBuild.
+For a TeamBuild XAML build, this would be done by editing the build definition and setting the "MSBuild arguments" appropriately e.g. */p:SQProjectKey=example.sqproject1*.
+On the command line this could done as follows:
 
 ```
 msbuild Solution1.sln /p:SQProjectKey=example.sqproject1

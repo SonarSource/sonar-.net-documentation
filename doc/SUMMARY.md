@@ -7,5 +7,5 @@
 * [Additional Configurations](additional-configurations.md)
 * [Appendix 1: Upgrading from v0.9 of the SonarQube MSBuild Runner](appendix-1.md)
 * [Appendix 2: Configuring the MSBuild SonarQube Runner](appendix-2.md)
-* [Appendix 3: Advanced MSBuild SonarQube Runner configuration options](appendix-3.md)
+* [Appendix 3: Advanced MSBuild SonarQube Runner configuration](appendix-3.md)
 * [Conclusion](conclusion.md)
