@@ -1,4 +1,4 @@
-# Appendix 2: Configuring the MSBuild SonarQube Runner
+﻿# Appendix 2: Configuring the MSBuild SonarQube Runner
 
 ## Contents
 
@@ -93,6 +93,9 @@ Individual projects can be excluded from analysis by setting the MSBuild propert
 	<SonarQubeExclude>true</SonarQubeExclude>
 </PropertyGroup>
 ```
+
+See [Appendix 3: Advanced MSBuild SonarQube Runner configuration](appendix-3.md) for more information on how *SonarQubeExclude* can be set conditionally at build time.
+
 
 ### Excluding individual files from analysis
 

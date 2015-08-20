@@ -8,13 +8,17 @@ Setting *SonarQubeExclude* at project level is a simple way to ensure that a pro
 However, because *SonarQubeExclude* is an MSBuild property it can be set conditionally like any other MSBuild property.
 This allows considerable flexibility in deciding whether a project should be excluded or not which can be useful in a number of scenarios.
 
+The following examples show how standard MSBuild features can be used to customise the projects that are analysed.
+
+
 For example, the same MSBuild project may be included in multiple different solutions.
 In this situation it is generally desirable that the MSBuild project should only be analysed once e.g.
 ```
-Solution1 contains projects *A*, *B* and *X*.
-	All of the projects should be analysed as part of SonarQube project *example.sqproject1*
-Solution2 contains projects *C*, *D* and *X*.
-	Only projects *C* and *D* should be analysed as part of SonarQube project *example.sqproject2*
+Solution1 contains projects 'A', 'B' and 'X'.
+	All of the projects should be analysed as part of SonarQube project 'example.sqproject1'
+
+Solution2 contains projects 'C', 'D' and 'X'.
+	Only projects 'C' and 'D' should be analysed as part of SonarQube project 'example.sqproject2'
 ```
 
 Two possible methods of handling this scenario using a small amount of customisation and configuration are shown below.
