@@ -38,7 +38,7 @@ The detailed steps are as follows:
 </PropertyGroup>
 ```
 
-- create a [targets file](https://msdn.microsoft.com/en-us/library/ms164312.aspx): with the following content:
+- create a [targets file](https://msdn.microsoft.com/en-us/library/ms164312.aspx) with the following content:
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
