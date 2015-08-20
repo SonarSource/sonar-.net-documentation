@@ -53,6 +53,7 @@ or dropped in a location in which it will be automatically imported such as *%Pr
 
 At build time, the relevant SonarQube project key would be passed to MSBuild.
 For a TeamBuild XAML build, this would be done by editing the build definition and setting the "MSBuild arguments" appropriately e.g. */p:SQProjectKey=example.sqproject1*.
+
 On the command line this could done as follows:
 
 ```
