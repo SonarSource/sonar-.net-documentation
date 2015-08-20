@@ -52,8 +52,8 @@ The detailed steps are as follows:
 </Project>
 ```
 
-- import the custom targets file using one of the standard MSBuild mechanisms e.g. either explicitly imported into the relevant projects, 
-or dropped in a location in which it will be automatically imported such as *%ProgramFiles(x86)%\MSBuild\**[MSBuild version]**\Microsoft.Common.Targets\ImportBefore\*.
+- import the custom targets file using one of the standard MSBuild mechanisms e.g. either explicitly import it into the relevant projects, 
+or drop it in a location in which it will be automatically imported such as *%ProgramFiles(x86)%\MSBuild\**[MSBuild version]**\Microsoft.Common.Targets\ImportBefore\*.
 
 - at build time, pass the relevant SonarQube project key to MSBuild.
   - For a TeamBuild XAML build, this would be done by editing the build definition and setting the "MSBuild arguments" appropriately e.g. */p:SQProjectKey=example.sqproject1*.
