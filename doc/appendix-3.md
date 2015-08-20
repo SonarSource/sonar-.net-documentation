@@ -26,7 +26,11 @@ Both methods conditionally set the *SonarQubeExclude* property based on addition
 
 ### Explicitly associating an MSBuild project with a SonarQube project
 
-In this approach, a property is added to MSBuild project *X* specifying the SonarQube project key to which the MSBuild project belongs:
+One approach is to add a property to the MSBuild project to specify which SonarQube project it belongs to, and to create a custom [targets file](https://msdn.microsoft.com/en-us/library/ms164312.aspx) that filters out projects that do not match the project key that is supplied at build time.
+
+The detailed steps are as follows:
+
+- add a property to MSBuild project *X* specifying the SonarQube project key to which the MSBuild project belongs:
 
 ```xml
 <PropertyGroup>
@@ -34,7 +38,7 @@ In this approach, a property is added to MSBuild project *X* specifying the Sona
 </PropertyGroup>
 ```
 
-The following targets file will conditionally set *SonarQubeExclude* based on a value supplied on the command line:
+- create a [targets file](https://msdn.microsoft.com/en-us/library/ms164312.aspx): with the following content:
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
@@ -48,13 +52,12 @@ The following targets file will conditionally set *SonarQubeExclude* based on a 
 </Project>
 ```
 
-This custom targets file would be imported using one of the standard MSBuild mechanisms e.g. either explicitly imported into the relevant projects, 
+- import the custom targets file using one of the standard MSBuild mechanisms e.g. either explicitly imported into the relevant projects, 
 or dropped in a location in which it will be automatically imported such as *%ProgramFiles(x86)%\MSBuild\**[MSBuild version]**\Microsoft.Common.Targets\ImportBefore\*.
 
-At build time, the relevant SonarQube project key would be passed to MSBuild.
-For a TeamBuild XAML build, this would be done by editing the build definition and setting the "MSBuild arguments" appropriately e.g. */p:SQProjectKey=example.sqproject1*.
-
-On the command line this could done as follows:
+- at build time, pass the relevant SonarQube project key to MSBuild.
+  - For a TeamBuild XAML build, this would be done by editing the build definition and setting the "MSBuild arguments" appropriately e.g. */p:SQProjectKey=example.sqproject1*.
+  - On the command line this could done as follows:
 
 ```
 msbuild Solution1.sln /p:SQProjectKey=example.sqproject1
