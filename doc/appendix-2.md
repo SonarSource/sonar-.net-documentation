@@ -68,6 +68,9 @@ Other test projects are recognised by applying a regular expression to the full 
 
 Figure – MSBuild settings tab of the C# plugin
 
+The regular expression uses regular [.Net regular expression syntax](https://msdn.microsoft.com/en-us/library/az24scfc(v=vs.110).aspx).
+
+In version 1.0.1 onwards, the default regular expression treats projects that contain the word "test" in the project file name as test projects (in version 1.0, projects that contained "test" anywhere in the path were treated as test projects, but user feedback indicated that this regular expression was not specific enough and incorrectly classified to many projects).
 
 Finally, it is possible to manually classify a project by setting the MSBuild property *SonarQubeTestProject*, e.g.
 
