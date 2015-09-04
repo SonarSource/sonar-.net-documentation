@@ -14,7 +14,7 @@ The structure of this documentation has been designed to ease the generation of 
 
 0. Install NPM (See npmjs.com)
 0. Install GitBook with help of the following command line `npm install gitbook-cli -g`
-0. Install Calibre (See http://calibre-ebook.com/download). The `ebook-converter` command line must be available in the `%PATH%` (or `$PATH`). For Mac OS X users, this might be done with help of the following command line `sudo ln -s ~/Applications/calibre.app/Contents/MacOS/ebook-convert /usr/bin`
+0. Install Calibre (See http://calibre-ebook.com/download). The `ebook-convert` command line must be available in the `%PATH%` (or `$PATH`). For Mac OS X users, this might be done with help of the following command line `sudo ln -s ~/Applications/calibre.app/Contents/MacOS/ebook-convert /usr/bin`
 
 ## Manual actions required when doing a release
 
