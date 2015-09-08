@@ -1,7 +1,7 @@
 # Analyze .Net Projects From Team Foundation Server 2013 and 2015
 
 ## Overview
-The [build system](https://msdn.microsoft.com/en-us/library/ms181709(v=vs.120).aspx) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
+The [build system](https://msdn.microsoft.com/en-us/library/ms181709%28v=vs.120%29.aspx) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
 Builds are defined and customised using XAML.
 TFS 2015 introduced a [new build system](https://msdn.microsoft.com/en-us/Library/vs/alm/Build/overview) but also supports the legacy "XAML build" system from TFS 2013.
 
