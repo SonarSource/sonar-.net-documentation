@@ -3,7 +3,7 @@
 The goal of this documentation is to explain to any member of the .Net community how to install, configure and use the SonarQube ecosystem to analyze .Net projects.
 
 # PDF version of the documentation
-The pdf for the latest release is available [here](https://github.com/SonarSource/sonar-.net-documentation/releases/download/1.1.0/SonarQube-Setup-Guide-For-Net-Users-V-1-1-0.pdf).
+The pdf for the latest release is available [here](https://github.com/SonarSource/sonar-.net-documentation/releases/download/1.2.0/SonarQube-Setup-Guide-For-Net-Users-v-1-2-0.pdf).
 
 
 # GitBook
