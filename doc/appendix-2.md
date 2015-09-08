@@ -55,6 +55,17 @@ If the same setting is supplied in multiple places then the value that is used i
 	- settings specified in an MSBuild project file
 	- settings fetched from the SonarQube server
 
+## Importing Code Coverage reports
+
+See http://docs.sonarqube.org/x/CoBh for details on how to import Code Coverage reports into SonarQube.
+
+## Importing Unit Test Execution reports
+
+See http://docs.sonarqube.org/x/DIBh for details on how to import Unit Test Execution reports into SonarQube.
+
+## Importing ReSharper Command Line Tools reports
+
+See http://docs.sonarqube.org/x/lwAW for details on how to import ReSharper Command Line Tools reports into SonarQube.
 
 ## Classifying projects as test projects
 
