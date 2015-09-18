@@ -154,7 +154,7 @@ The following steps provide an outline of how to set this up:
 * Add *Command Line* build step before the *MSBuild* step and after the *Visual Studio Test* step
 * In the pre-build command line:
   * set the *Tool* field to point to the *MSBuild.SonarQube.Runner.exe*
-  * supply the necessary arguments in the *Arguments* field e.g. *begin */key:my.project /name:"My Project" /version:1.0*
+  * supply the necessary arguments in the *Arguments* field e.g. *begin /key:my.project /name:"My Project" /version:1.0*
   * supply the the SonarQube server URL and credentials either in the *Arguments* field or in a settings file e.g. */d:sonar.host.url=http://mySonarQube:9000*
 
 * In the post-build command:
