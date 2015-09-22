@@ -77,12 +77,6 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost/Sonar;instance=SQLEXPRESS;SelectMethod=Cursor
 		```
 
-	- Alternatively if you are also looking for **integrated security** you can consider:
-
-		```
-		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost:1433/sonar;instance=SQLEXPRESS;integratedSecurity=true;authenticationScheme=JavaKerberos
-		```
-
 	- Basic configuration of SonarQube consists of making a few updates to the **sonar.properties** file.
 	- This file is located in the conf folder located under the SonarQube installation folder.
 		Example: **C:\\SonarQube\\SonarQube-5.1\\conf**.
@@ -115,25 +109,8 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		**>> NOTE >>** The jdbc driver installed with SonarQube requires the SQL Server Browser to be running. Check that it is running using the Services Console.
 
 	- Save and close the file.
-5. **OPTIONAL - Connect with integrated authenticaton on Windows**
-	
-	**>> NOTE >>** We tested this configuration in an environment that has no security add-ons. If this does not work in your environment, you need to troubleshoot with your IT departments.
-	
-	- Please refer to [Building the Connection URL](https://msdn.microsoft.com/en-us/library/ms378428.aspx) for additional details on how to build SQL Server connection string for JDBC.
-	- Edit **sonar.properties**.
-	- Change the **SQL Server connection** string to use **integrated security**. 
-		    
-    		
-    		# Only the distributed jTDS driver is supported. 
-    		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;integratedSecurity=true;”
-    		
-	- If you are using Sonar-runner for analysis, edit **sonar-runner.properties** and add the same configuration. 
-	
-		    #----- Microsoft SQLServer
-    		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost;databaseName=sonar;integratedSecurity=true;”
-		
 
-6. <a name="installLatestPluginAnchor"></a>**Download and install latest SonarQube C# plugin**
+5. <a name="installLatestPluginAnchor"></a>**Download and install latest SonarQube C# plugin**
 
 	- Download the latest sonar-csharp-plugin-X.Y.jar. At the time of writing, all versions of the C\# plugin are available from the [C\# Plugin](http://redirect.sonarsource.com/plugins/csharp.html) page, on the SonarQube site.
 	- Use version 4.1 or higher of the plugin.
@@ -142,7 +119,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Right-click the sonar sonar-csharp-plugin-X.Y.jar and select **properties**.
 	- Click the **Unblock** button to ensure the file is unblocked.
 
-7. **Run**
+6. **Run**
 
 	- Open Command Prompt and change directory (`cd`) to the extracted folder.
 
@@ -162,7 +139,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		![](_img/SonarQube-Web-Portal.png)
 	- You should see the default SonarQube web page as shown above. If not, re-validate settings as shown in the previous sections.
 	- If the web server does not start, consult the logs in **C:\\SonarQube\\SonarQube-5.1\\logs** to determine possible issues.
-8. **Verify the installed SonarQube C# plugin version**
+7. **Verify the installed SonarQube C# plugin version**
 	- Login to SonarQube using admin credentials.
 		- If this is the first time you are using SonarQube, the default admin credentials are:
 	
