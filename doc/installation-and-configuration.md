@@ -96,7 +96,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 		![](_img/sonar.ms-jdbc-sqlserver.png)
 	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting circled in the screenshot above and replace the connection string to match the server and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;
 
-		![](_img/sonar.jdbc-sqlexpress.png)
+		![](_img/sonar.ms-jdbc-sqlexpress.png)
 		
 		**>> NOTE >>** The jdbc driver installed with SonarQube requires the SQL Server Browser to be running. Check that it is running using the Services Console.
 
