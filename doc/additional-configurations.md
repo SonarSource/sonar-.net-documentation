@@ -115,7 +115,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
        - Copy sqljdbc_auth.dll to any folder in your path. You have to copy the 32 bit or 64 bit version of the dll depending upon the architecture of your server machine. 
        - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
 
-**>> NOTE >>** Steps 3 and 4 are required only if you want to use SQL Authentication.
+**>> NOTE >>** The next 2 Steps are required only if you want to use SQL Authentication.
 
 
 3. **Create database user for SonarQube**
