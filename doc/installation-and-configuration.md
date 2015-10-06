@@ -74,7 +74,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- **>> NOTE >>** This walkthrough assumes the use of the BK VM. If, for example, you are using **SQLExpress** instead, you have to update the connection string. Example:
 
 		```
-		sonar.jdbc.url=jdbc:sqlserver://localhost;instance=SQLEXPRESS;databaseName=sonar;integratedSecurity=true
+		sonar.jdbc.url=jdbc:sqlserver://localhost;instanceName=SQLEXPRESS;databaseName=sonar;integratedSecurity=true
 		```
 
 	- Basic configuration of SonarQube consists of making a few updates to the **sonar.properties** file.
