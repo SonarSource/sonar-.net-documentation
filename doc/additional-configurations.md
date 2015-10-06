@@ -116,6 +116,8 @@ Before you get to the task of creating a new database for SonarQube, you need to
        - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
 
 **>> NOTE >>** Steps 3 and 4 are required only if you want to use SQL Authentication.
+
+
 3. **Create database user for SonarQube**
 	- Within SSMS right-click on the **SecurityLogins** node (just under the Server\\Instance node).
 	- Select 
