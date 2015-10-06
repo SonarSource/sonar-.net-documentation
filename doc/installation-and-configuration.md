@@ -74,7 +74,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- **>> NOTE >>** This walkthrough assumes the use of the BK VM. If, for example, you are using **SQLExpress** instead, you have to update the connection string. Example:
 
 		```
-		sonar.jdbc.url=jdbc:sqlserver://localhost;databaseName=sonar;integratedSecurity=true
+		sonar.jdbc.url=jdbc:sqlserver://localhost;instance=SQLEXPRESS;databaseName=sonar;integratedSecurity=true
 		```
 
 	- Basic configuration of SonarQube consists of making a few updates to the **sonar.properties** file.
@@ -94,10 +94,11 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Search for and locate the entry for sonar.jdbc.url. There are several copies of this setting based on database type. Make sure you select the entry for Microsoft SQL Server.
 
 		![](_img/sonar.ms-jdbc-sqlserver.png)
-	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting circled in the screenshot above and replace the connection string to match the server and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;
+	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting highlighted in the screenshot above and replace the connection string to match the server and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;
 
 		![](_img/sonar.ms-jdbc-sqlexpress.png)
-		
+
+		**>> NOTE >>** Microsoft JDBC driver is packaged with SonarQube 5.2. Earlier versions of SonarQube used the jTDS driver and the connection string format was different.		
 		**>> NOTE >>** The jdbc driver installed with SonarQube requires the SQL Server Browser to be running. Check that it is running using the Services Console.
 
 	- Save and close the file.
