@@ -74,7 +74,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- **>> NOTE >>** This walkthrough assumes the use of the BK VM. If, for example, you are using **SQLExpress** instead, you have to update the connection string. Example:
 
 		```
-		sonar.jdbc.url=jdbc:jtds:sqlserver://localhost/Sonar;instance=SQLEXPRESS;SelectMethod=Cursor
+		sonar.jdbc.url=jdbc:sqlserver://localhost;databaseName=sonar;integratedSecurity=true
 		```
 
 	- Basic configuration of SonarQube consists of making a few updates to the **sonar.properties** file.
@@ -91,18 +91,11 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
  
 		![](_img/SonarQube-Port-9090.png)
 
-		**>>NOTE >>** Before proceeding with the below configuration steps make sure you have configured SonarQube to use SQL Server database instead of embedded database. 
-	
-	- Search for and locate the entry for **sonar.jdbc.username**.
-
-		![](_img/Sonar.jdbc.username-entry.png)
-	- Uncomment (i.e. delete the leading ‘\#’) the two **sonar.jdbc** settings circled in the screenshot above and replace **sonar** in each setting with the database login name and password, respectively.
-
 		![](_img/sonar.jdbc-delete-leading-hash.png)
 	- Search for and locate the entry for sonar.jdbc.url. There are several copies of this setting based on database type. Make sure you select the entry for Microsoft SQL Server.
 
 		![](_img/sonar.jdbc-sqlserver.png)
-	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting circled in the screenshot above and replace the connection string to match the server\\instance and database name for your machine. Example: **sqlserver://.\\SQLExpress/Sonar;SelectMethod=Cursor**
+	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting circled in the screenshot above and replace the connection string to match the server\\instance and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;
 
 		![](_img/sonar.jdbc-sqlexpress.png)
 		
