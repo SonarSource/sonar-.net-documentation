@@ -145,7 +145,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
 
 		![](_img/New-Database-Test-Connection-Worked.png)
 
-4. ** Setup Integrated Security (OPTIONAL)**
+4. **Setup Integrated Security (OPTIONAL)**
        - Download the Microsoft SQL JDBC Driver 4.1 package from http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774 
        - Copy sqljdbc_auth.dll to any folder in your path. You have to copy the 32 bit or 64 bit version of the dll depending upon the architecture of your server machine. 
        - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
