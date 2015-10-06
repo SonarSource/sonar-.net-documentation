@@ -109,7 +109,14 @@ Before you get to the task of creating a new database for SonarQube, you need to
 
 		![](_img/New-Database-accent-sensitive.png)
 	- Click **OK** to create the initial database.
-2. **Create database user for SonarQube**
+
+2. **Setup Integrated Security**
+       - Download the Microsoft SQL JDBC Driver 4.1 package from http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774 
+       - Copy sqljdbc_auth.dll to any folder in your path. You have to copy the 32 bit or 64 bit version of the dll depending upon the architecture of your server machine. 
+       - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
+
+**>> NOTE >>** Steps 3 and 4 are required only if you want to use SQL Authentication.
+3. **Create database user for SonarQube**
 	- Within SSMS right-click on the **SecurityLogins** node (just under the Server\\Instance node).
 	- Select 
 
@@ -127,7 +134,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
 		![](_img/New-Database-User-Mapping.png)
 	- Click **OK** to complete the new user setup.
 
-3. **Test connection**
+4. **Test connection**
 	- Launch Visual Studio and select **Tools**, **Connect to Database...**
 
 		![](_img/Test-Connection-01-ContextMenu.png)
@@ -145,11 +152,6 @@ Before you get to the task of creating a new database for SonarQube, you need to
 
 		![](_img/New-Database-Test-Connection-Worked.png)
 
-4. **Setup Integrated Security (OPTIONAL)**
-       - Download the Microsoft SQL JDBC Driver 4.1 package from http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774 
-       - Copy sqljdbc_auth.dll to any folder in your path. You have to copy the 32 bit or 64 bit version of the dll depending upon the architecture of your server machine. 
-       - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
-       
 ## Secure the SonarQube Portal
 
 By default, the SonarQube portal allows anonymous access, although SonarQube does provide a complete authentication and authorization mechanism to manage security. As users of the portal will be able to view the analyzed source code, it is recommended that the anonymous access to the site not be permitted.
