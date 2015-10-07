@@ -117,7 +117,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
 
 
 3. **Create database user for SonarQube(OPTIONAL)**
-	This step is required only if you want to use SQL Authentication.
+	- This step is required only if you want to use SQL Authentication.
 
 	- Within SSMS right-click on the **SecurityLogins** node (just under the Server\\Instance node).
 	- Select 
@@ -146,7 +146,7 @@ Before you get to the task of creating a new database for SonarQube, you need to
 	- On the **Add Connection** dialog.
 		- Set the Server Name to your SQL Server instance (e.g. **.\\SQLExpress**)
 		- Select the appropiate authentication method.
-		- If you are using SQL Server Authentication and provide the **User Name** and **Password** you created.
+		- If you are using SQL Server Authentication, provide the **User Name** and **Password** you created.
 		- Enter the name of the database you created, for example Sonar.
 
 			![](_img/New-Database-DB-Name.png)
