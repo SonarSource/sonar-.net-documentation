@@ -115,10 +115,9 @@ Before you get to the task of creating a new database for SonarQube, you need to
        - Copy sqljdbc_auth.dll to any folder in your path. You have to copy the 32 bit or 64 bit version of the dll depending upon the architecture of your server machine. 
        - Ensure that sonar.jdbc.username or sonar.jdbc.password properties are commented. If these properties are set, SonarQube will use SQL Authentication.
 
-**>> NOTE >>** The next 2 Steps are required only if you want to use SQL Authentication.
 
-
-3. **Create database user for SonarQube**
+3. **Create database user for SonarQube(OPTIONAL)**
+	**>> NOTE >>** This step is required only if you want to use SQL Authentication.
 	- Within SSMS right-click on the **SecurityLogins** node (just under the Server\\Instance node).
 	- Select 
 
@@ -145,7 +144,8 @@ Before you get to the task of creating a new database for SonarQube, you need to
 		![](_img/New-Database-SQLServer-As-Source.png)
 	- On the **Add Connection** dialog.
 		- Set the Server Name to your SQL Server instance (e.g. **.\\SQLExpress**)
-		- Select Use SQL Server Authentication and provide the **User Name** and **Password** you created.
+		- Select the appropiate authentication method.
+		- If you are using SQL Server Authentication and provide the **User Name** and **Password** you created.
 		- Enter the name of the database you created, for example Sonar.
 
 			![](_img/New-Database-DB-Name.png)
