@@ -94,7 +94,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 	- Search for and locate the entry for sonar.jdbc.url. There are several copies of this setting based on database type. Make sure you select the entry for Microsoft SQL Server.
 
 		![](_img/sonar.ms-jdbc-sqlserver.png)
-	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting highlighted in the screenshot above and replace the connection string to match the server and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;
+	- Uncomment (i.e. delete the leading ‘\#’) the sonar.jdbc.url setting highlighted in the screenshot above and replace the connection string to match the server and database name for your machine. Example: **sqlserver://localhost;databaseName=sonar;**
 
 		![](_img/sonar.ms-jdbc-sqlexpress.png)
 
