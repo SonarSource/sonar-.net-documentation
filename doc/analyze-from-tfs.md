@@ -140,6 +140,9 @@ Try modifying the build definition to remove the SonarQube.MSBuild.Runner.exe en
 
 Most analysis-related configuration or execution errors will cause the build to fail and will be appear on the Build Summary. Additional information can be found by viewing the logs or diagnostic information (i.e. by clicking on **View Log**, or **Diagnostics** at the top of the Build Summary page).
 
+#### During a XAML build, the analysis fails with a "System.ArgumentNullException ... Parameter name: tfsUri"
+
+Make sure you are using at least TFS 2013 Update 2 agent software. 
 
 ## Analyzing projects using the new TFS 2015 build system
 The intention is to provide custom tasks to make the process of performing SonarQube analysis in the TFS build system straightfoward.
