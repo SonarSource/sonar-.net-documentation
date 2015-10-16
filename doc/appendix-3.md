@@ -106,3 +106,27 @@ msbuild Solution1.sln /p:SQPathFilter=c:\\web
 REM Only analyse the framework projects
 msbuild Solution2.sln /p:SQPathFilter=c:\\framework
 ```
+
+## Specifying additional ItemGroups to be analysed
+
+An MSBuild project refers to files using named *Item* elements inside [ItemGroups](https://msdn.microsoft.com/en-us/library/646dk05y.aspx).
+By default, the MSBuild.SonarQube.Runner will analyse the item types normally used for source files (e.g. *Compile*, *Content*, *Page* etc).
+
+You can change the list of item types to analyse by setting the MSBuild property *$(SQAnalysisFileItemTypes)* to a semi-colon separated list of the names of the item types e.g.
+
+```xml
+<PropertyGroup>
+        <SQAnalysisFileItemTypes>MyFirstType;MySecondType</SQAnalysisFileItemTypes>
+<PropertyGroup>
+```
+
+In the above example only files in the *MyFirstType* and *MySecondType* will be analysed. If you want to add to the existing list of item types you can do so as follows:
+
+```xml
+<PropertyGroup>
+        <!-- To add to the default set of item types you must set the property *after* the
+               standard Microsoft.VisualBasic.targets/Microsoft.CSharp.targets have been imported,
+               and must include a reference to the existing property value  -->
+        <SQAnalysisFileItemTypes>$(SQAnalysisFileItemTypes);MyFirstType</SQAnalysisFileItemTypes>
+<PropertyGroup>
+```
