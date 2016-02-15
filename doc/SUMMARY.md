@@ -6,6 +6,6 @@
 * [Analyze .NET Projects From Team Foundation Server 2013 and 2015](analyze-from-tfs.md)
 * [Additional Configurations](additional-configurations.md)
 * [Appendix 1: Upgrading from v0.9 of the SonarQube MSBuild Runner](appendix-1.md)
-* [Appendix 2: Configuring the MSBuild SonarQube Runner](appendix-2.md)
-* [Appendix 3: Advanced MSBuild SonarQube Runner configuration](appendix-3.md)
+* [Appendix 2: Configuring the SonarQube Scanner for MSBuild](appendix-2.md)
+* [Appendix 3: Advanced SonarQube Scanner for MSBuild configuration](appendix-3.md)
 * [Conclusion](conclusion.md)

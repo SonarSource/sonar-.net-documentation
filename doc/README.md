@@ -1,4 +1,4 @@
-# Introduction
+﻿# Introduction
 
 “*SonarSource products generate process-level benefits, such as decreasing software development risk, raising software quality and improving team productivity*” .
 
@@ -10,6 +10,6 @@ As we continue ongoing development, the cost of paying down on the technical deb
 
 SonarQube is an open source platform providing continuous inspection of your code quality. Through integration with Team Foundation Server and SonarQube you will be empowered to continuously inspect the technical debt, manage the debt, and pay down on the debt.
 
-The following are the details of getting the analysis of a .NET project in place either integrated in an existing deployment of Team Foundation Server or in a standalone command line way using the **MSBuild SonarQube Runner**.
+The following are the details of getting the analysis of a .NET project in place either integrated in an existing deployment of Team Foundation Server or in a standalone command line way using the *SonarQube Scanner for MSBuild*.
 
 **>> NOTE >>** For more information on SonarQube, please refer to [Technical Debt](http://docs.sonarqube.org/display/SONAR/Technical+Debt) and [Evaluate your technical debt with Sonar](http://www.sonarqube.org/evaluate-your-technical-debt-with-sonar/).

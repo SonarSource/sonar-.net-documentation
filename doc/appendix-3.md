@@ -1,6 +1,6 @@
-# Appendix 3: Advanced MSBuild SonarQube Runner configuration
+# Appendix 3: Advanced SonarQube Scanner for MSBuild configuration
 
-This appendix contains additional information on how the MSBuild SonarQube Runner can be configured to work effectively in more complex real-world scenarios.
+This appendix contains additional information on how the *SonarQube Scanner for MSBuild* can be configured to work effectively in more complex real-world scenarios.
 
 ## Conditionally excluding projects from analysis
 
@@ -42,7 +42,7 @@ The detailed steps are as follows:
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-	<!-- This target customises the SonarQube MSBuild runner targets to limit the project that are analysed.
+	<!-- This target customises the *SonarQube Scanner for MSBuild* targets to limit the project that are analysed.
 	Only projects with matching SonarQube project keys will be analysed.
 	-->
 	<PropertyGroup Condition=" $(SQProjectKey) != '' AND $(SonarQubeExclude) == '' ">
@@ -85,7 +85,7 @@ The following custom targets file selects the projects to analyse based on the f
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-	<!-- This target customises the SonarQube MSBuild runner targets to limit the projects that are analysed.
+	<!-- This target customises the SonarQube Scanner for MSBuild targets to limit the projects that are analysed.
 	Projects whose full path and file name do not match the specified filter will be marked as "excluded".
 	The regular expression uses the normal .NET regular expression syntax.
 	-->
@@ -110,7 +110,7 @@ msbuild Solution2.sln /p:SQPathFilter=c:\\framework
 ## Specifying additional ItemGroups to be analysed
 
 An MSBuild project refers to files using named *Item* elements inside [ItemGroups](https://msdn.microsoft.com/en-us/library/646dk05y.aspx).
-By default, the MSBuild.SonarQube.Runner will analyse the item types normally used for source files (e.g. *Compile*, *Content*, *Page* etc).
+By default, the *SonarQube Scanner for MSBuild* will analyse the item types normally used for source files (e.g. *Compile*, *Content*, *Page* etc).
 
 You can change the list of item types to analyse by setting the MSBuild property *$(SQAnalysisFileItemTypes)* to a semi-colon separated list of the names of the item types e.g.
 

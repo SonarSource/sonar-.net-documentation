@@ -1,4 +1,4 @@
-# Analyze .Net Projects From Team Foundation Server 2013 and 2015
+﻿# Analyze .Net Projects From Team Foundation Server 2013 and 2015
 
 ## Overview
 The [build system](https://msdn.microsoft.com/en-us/library/ms181709%28v=vs.120%29.aspx) in Team Foundation Server 2013 ("TFS 2013") is based on Windows Workflow.
@@ -136,7 +136,7 @@ This is a known issue that is being tracked here [http://jira.sonarsource.com/br
 
 #### Build did not complete successfully and build summary contains one or more errors.
 
-Try modifying the build definition to remove the SonarQube.MSBuild.Runner.exe entries in the pre- and post- script sections. If the build completes successfully, then the errors are related to analysis.
+Try modifying the build definition to remove the *SonarQube.MSBuild.Runner.exe* entries in the pre- and post- script sections. If the build completes successfully, then the errors are related to analysis.
 
 Most analysis-related configuration or execution errors will cause the build to fail and will be appear on the Build Summary. Additional information can be found by viewing the logs or diagnostic information (i.e. by clicking on **View Log**, or **Diagnostics** at the top of the Build Summary page).
 
@@ -152,11 +152,11 @@ However, it is currently possible to perform SonarQube analysis in the new build
 The following steps provide an outline of how to set this up:
 
 * Create an on-premise VSO 2015 build agent using the instructions [here](https://msdn.microsoft.com/Library/vs/alm/Build/agents/windows)
-* Install the *MSBuild.SonarQube.Runner* on the build agent
+* Install the *SonarQube Scanner for MSBuild* on the build agent
 * Create a new build definition that includes the *MSBuild* and (optionally) *Visual Studio Test* steps
 * Add *Command Line* build step before the *MSBuild* step and after the *Visual Studio Test* step
 * In the pre-build command line:
-  * set the *Tool* field to point to the *MSBuild.SonarQube.Runner.exe*
+  * set the *Tool* field to point to *MSBuild.SonarQube.Runner.exe*
   * supply the necessary arguments in the *Arguments* field e.g. *begin /key:my.project /name:"My Project" /version:1.0*
   * supply the the SonarQube server URL and credentials either in the *Arguments* field or in a settings file e.g. */d:sonar.host.url=http://mySonarQube:9000*
 

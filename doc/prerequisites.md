@@ -1,4 +1,4 @@
-# Prerequisites 
+﻿# Prerequisites 
 
 At the time of this writing, the current version of SonarQube, v5.1, had the following requirements.
 
@@ -30,6 +30,6 @@ Figure – Web browser prerequisites
 
 ## File Encoding
 
-SonarQube assumes that all of the source files have the same file encoding. Currently, the MSBuild SonarQube Runner expect this to be UTF-8. Non-compliance will result in incorrect analysis and display when viewed in the SonarQube portal (for example when drilling down to view the source associated with an issue).
+SonarQube assumes that all of the source files have the same file encoding. Currently, the *SonarQube Scanner for MSBuild* expects this to be UTF-8. Non-compliance will result in incorrect analysis and display when viewed in the SonarQube portal (for example when drilling down to view the source associated with an issue).
 
 **>> NOTE >>** For the most up to date information on SonarQube requirements, check out the [requirements](http://docs.sonarqube.org/display/SONAR/Requirements).

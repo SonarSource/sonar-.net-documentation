@@ -1,4 +1,4 @@
-# Installation and Configuration
+﻿# Installation and Configuration
 ## Installation Topologies 
 ### Minimum Deployment
 
@@ -156,14 +156,14 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 
 	**>> NOTE >>** Please refer to section **[Additional Configurations](additional-configurations.md)** for more details on how-to configure additional SonarQube configurations that are required for enterprise level deployment.
 
-## Setup of the MSBuild SonarQube Runner on the Build Agent Machine
+## Setup of the *SonarQube Scanner for MSBuild* on the Build Agent Machine
 
 - You should install it on any machine that will launch SonarQube analysis (example: development machine and build agent).
-- In case of installing MSBuild SonarQube Runner on a development machine or build agent, you need to make sure that Java SE Runtime Environment installed on that machine.
+- In case of installing *SonarQube Scanner for MSBuild* on a development machine or build agent, you need to make sure that Java SE Runtime Environment installed on that machine.
 - Java SE Runtime Environment installation is not required if Visual Studio 2015 with Android tooling/Cross platform tools are installed since JDK is being installed part of Visual Studio installation.
 
 1. **Extract**
-	- Download the latest **MSBuild SonarQube Runner** from the SonarQube [downloads](http://www.sonarqube.org/downloads/).
+	- Download the latest *SonarQube Scanner for MSBuild* from the SonarQube [downloads](http://www.sonarqube.org/downloads/).
 	- Right-click on the downloaded .zip file and click on the **Unblock** button.
 
 		![](_img/Unblock-Button.png)
@@ -181,7 +181,7 @@ While preparing a Virtual Machine that will host SonarQube database, portal and/
 
 3. **OPTIONAL - Update the `%PATH%` environment variable**
 
-	- Add the directory containing the MSBuild SonarQube Runner executable to the `%PATH%` if you intend to use it from the command line:
+	- Add the directory containing *MSBuild.SonarQube.Runner.exe* to the `%PATH%` if you intend to use it from the command line:
 
 		![](_img/MSBuild.SonarQube.Runner.PATH.png)
 

@@ -1,4 +1,4 @@
-﻿# Appendix 2: Configuring the MSBuild SonarQube Runner
+﻿# Appendix 2: Configuring the SonarQube Scanner for MSBuild
 
 ## Contents
 
@@ -8,7 +8,7 @@
 
 ## Supplying additional analysis settings
 
-The analysis process can be configured by passing additional analysis settings to the MSBuild SonarQube Runner.
+The analysis process can be configured by passing additional analysis settings to the *SonarQube Scanner for MSBuild*.
 Global settings can either be passed on the command line or in a settings file.
 Project-level settings can be set in the MSBuild project file.
 
@@ -28,8 +28,8 @@ Additional settings can also be supplied in a settings file. The location of the
 	MSBuild.SonarQube.Runner.exe /v:1.0 /n:"My project" /k:my.project /s:C:\SharedSettings\SonarQube.Analysis.xml
 ```
 
-If the */s* command-line switch is not supplied then the MSBuild SonarQube Runner will look for a default settings file called *SonarQube.Analysis.xml* in the same directory as the MSBuild.SonarQube.Runner executable file.
-The default settings file shipped with the MSBuild SonarQube Runner contains placeholders for the most commonly-required settings and can be used as a template for custom settings files.
+If the */s* command-line switch is not supplied then the *SonarQube Scanner for MSBuild* will look for a default settings file called *SonarQube.Analysis.xml* in the same directory as the MSBuild.SonarQube.Runner executable file.
+The default settings file shipped with the *SonarQube Scanner for MSBuild* contains placeholders for the most commonly-required settings and can be used as a template for custom settings files.
 
 ### Passing additional non-global settings in a project file
 
@@ -71,7 +71,7 @@ See http://docs.sonarqube.org/x/lwAW for details on how to import ReSharper Comm
 
 SonarQube analyses test projects and product projects differently so it is important that projects are correctly classified as being either test or product projects.
 
-The MSBuild SonarQube Runner will automatically recognise MSTest unit test projects as being test projects (because of the presence of a well-known guid in the project file).
+The *SonarQube Scanner for MSBuild* will automatically recognise MSTest unit test projects as being test projects (because of the presence of a well-known guid in the project file).
 
 Other test projects are recognised by applying a regular expression to the full path of the project file. The regular expression can configured in the SonarQube portal on the settings page for the C# plugin:
 
@@ -110,7 +110,7 @@ Individual projects can be excluded from analysis by setting the MSBuild propert
 </PropertyGroup>
 ```
 
-See [Appendix 3: Advanced MSBuild SonarQube Runner configuration](appendix-3.md) for more information on how *SonarQubeExclude* can be set conditionally at build time.
+See [Appendix 3: Advanced SonarQube Scanner for MSBuild configuration](appendix-3.md) for more information on how *SonarQubeExclude* can be set conditionally at build time.
 
 
 ### Excluding individual files from analysis
