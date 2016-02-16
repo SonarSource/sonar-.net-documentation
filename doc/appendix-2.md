@@ -1,10 +1,11 @@
-﻿# Appendix 2: Configuring the SonarQube Scanner for MSBuild
+# Appendix 2: Configuring the SonarQube Scanner for MSBuild
 
 ## Contents
 
 - [Supplying additional analysis settings](#supplying-additional-analysis-settings)
 - [Classifying projects as test projects](#classifying-projects-as-test-projects)
 - [Excluding artefacts from analysis](#excluding-artefacts-from-analysis)
+- [Using Roslyn analyzers with the SonarQube Scanner for MSBuild](#using-roslyn-analyzers-with-the-sonarqube-scanner-for-msbuild)
 
 ## Supplying additional analysis settings
 
@@ -146,4 +147,4 @@ Starting with *SonarQube Scanner for MSBuild* v2.0 and the C# plugin v4.5, it is
 No special configuration of the MSBuild projects, the scanner or the C# plugin is required, and it is not necessary for the Roslyn analyzers to be manually installed on the machine performing the analysis. However, it is necessary for there to be a custom *SonarQube* plugin that wraps the custom analyzer to make *SonarQube* and the C# plugin aware of the Roslyn analyzer and the rules that it provides.
 
 If you are using a custom analyzer provided by a third-party, check with them to see if they also provide the *SonarQube* plugin for their analyzer.
-If not, or if you are the analyzer author and want to create a *SonarQube* plugin for your analyzers, you can use the [SDK for SonarQube Roslyn Analyzer Plugins](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to generate one. See the documentation in the GitHub project for more information.
+If not, or if you are the analyzer author and want to create a *SonarQube* plugin for your analyzers, you can use the [SDK for SonarQube Roslyn Analyzer Plugins](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to generate one. See the documentation in the SDK project for more information.
