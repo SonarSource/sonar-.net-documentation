@@ -136,3 +136,14 @@ It is possible to manually exclude a specific file from analysis by setting the 
 	</Compile>
 </ItemGroup>
 ```    
+
+## Using Roslyn analyzers with the SonarQube Scanner for MSBuild
+
+Microsoft .Net provides a rich code analysis framework referred to as "Roslyn" that makes it easy to write custom code analyzers for C# and VB code.
+There are many articles that describe how to write such an analyzer (see for example [this article](https://msdn.microsoft.com/en-us/magazine/dn879356.aspx) on MSDN).
+
+Starting with *SonarQube Scanner for MSBuild* v2.0 and the C# plugin v4.5, it is possible to upload issues found by such custom Roslyn analyzers to *SonarQube*.
+No special configuration of the MSBuild projects, the scanner or the C# plugin is required, and it is not necessary for the Roslyn analyzers to be manually installed on the machine performing the analysis. However, it is necessary for there to be a custom *SonarQube* plugin that wraps the custom analyzer to make *SonarQube* and the C# plugin aware of the Roslyn analyzer and the rules that it provides.
+
+If you are using a custom analyzer provided by a third-party, check with them to see if they also provide the *SonarQube* plugin for their analyzer.
+If not, or if you are the analyzer author and want to create a *SonarQube* plugin for your analyzers, you can use the [SDK for SonarQube Roslyn Analyzer Plugins](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to generate one. See the documentation in the GitHub project for more information.
