@@ -4,7 +4,7 @@
 
 - [Supplying additional analysis settings](#supplying-additional-analysis-settings)
 - [Classifying projects as test projects](#classifying-projects-as-test-projects)
-- [Excluding artefacts from analysis](#excluding-artefacts-from-analysis)
+- [Excluding artifacts from analysis](#excluding-artifacts-from-analysis)
 - [Using Roslyn analyzers with the SonarQube Scanner for MSBuild](#using-roslyn-analyzers-with-the-sonarqube-scanner-for-msbuild)
 
 ## Supplying additional analysis settings
@@ -96,7 +96,7 @@ Finally, it is possible to manually classify a project by setting the MSBuild pr
 ``` 
 
 
-## Excluding artefacts from analysis
+## Excluding artifacts from analysis
 
 ### Excluding projects from analysis
 
